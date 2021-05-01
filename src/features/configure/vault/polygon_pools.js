@@ -82,15 +82,15 @@ export const polygonPools = [
   },
   {
     id: 'quick-usdc-usdt',
-    logo: 'polygon/USDC-USDT.png', // TODO, make logo
+    logo: 'polygon/USDC-USDT.png',
     name: 'USDC-USDT LP',
     token: 'USDC-USDT QLP',
     tokenDescription: 'QuickSwap',
-    tokenAddress: '0x2cf7252e74036d1da831d11089d326296e64a728', //want
+    tokenAddress: '0x2cf7252e74036d1da831d11089d326296e64a728',
     tokenDecimals: 18,
     tokenDescriptionUrl: '#',
     earnedToken: 'mooQuickUSDC-USDT',
-    earnedTokenAddress: '0x4462817b53E76b722c2D174D0148ddb81452f1dE', //vault
+    earnedTokenAddress: '0x4462817b53E76b722c2D174D0148ddb81452f1dE',
     earnContractAddress: '0x4462817b53E76b722c2D174D0148ddb81452f1dE',
     pricePerFullShare: 1,
     tvl: 0,
