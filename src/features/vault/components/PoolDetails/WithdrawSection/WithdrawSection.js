@@ -32,7 +32,7 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
       .dividedBy(new BigNumber(10).exponentiatedBy(pool.tokenDecimals));
 
     setWithdrawAmount({
-      amount: sliderNum === 0 ? 0 : calculateReallyNum(total, sliderNum),
+      amount: sliderNum === 0 ? 0 : calculateReallyNum(total, sliderNum, pool.tokenDecimals),
       slider: sliderNum,
     });
   };
