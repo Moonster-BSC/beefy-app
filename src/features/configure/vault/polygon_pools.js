@@ -4,7 +4,7 @@ const elkPools = [
     logo: 'polygon/AAVE-ETH.png', //TODO
     name: 'MATIC-ELK LP',
     token: 'MATIC-ELK QLP',
-    tokenDescription: 'QuickSwap',
+    tokenDescription: 'Elk',
     tokenAddress: '0xa7c7d39c5102b65557c7c494d033385215652e11',
     tokenDecimals: 18,
     tokenDescriptionUrl: '#',
