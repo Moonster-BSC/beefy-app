@@ -1,3 +1,33 @@
+const elkPools = [
+  {
+    id: 'elk-matic-elk',
+    logo: 'polygon/AAVE-ETH.png', //TODO
+    name: 'MATIC-ELK LP',
+    token: 'MATIC-ELK QLP',
+    tokenDescription: 'QuickSwap',
+    tokenAddress: '0xa7c7d39c5102b65557c7c494d033385215652e11',
+    tokenDecimals: 18,
+    tokenDescriptionUrl: '#',
+    earnedToken: 'mooElkMATIC-ELK',
+    earnedTokenAddress: '0x3B6ad4D11cc4979945de7697271da629dd63d56A',
+    earnContractAddress: '0x3B6ad4D11cc4979945de7697271da629dd63d56A',
+    pricePerFullShare: 1,
+    tvl: 0,
+    oracle: 'lps',
+    oracleId: 'elk-matic-elk',
+    oraclePrice: 0,
+    depositsPaused: false,
+    status: 'active',
+    platform: 'Elk',
+    assets: ['MATIC', 'ELK'],
+    callFee: 0.5,
+    addLiquidityUrl:
+      'https://quickswap.exchange/#/add/0xD6DF932A45C0f255f85145f286eA0b292B21C90B/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
+    buyTokenUrl:
+      'https://quickswap.exchange/#/swap?inputCurrency=0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39&outputCurrency=ETH',
+  }
+]  
+ 
  export const polygonPools = [
     {
     id: 'quick-mausdc-usdc',
@@ -269,4 +299,5 @@
         buyTokenUrl:
           'https://swap.cometh.io/#/swap?inputCurrency=0x2791bca1f2de4661ed88a30c99a7a9449aa84174&outputCurrency=0x9c78ee466d6cb57a4d01fd887d2b5dfb2d46288f',
       },
+      ...elkPools
 ];
