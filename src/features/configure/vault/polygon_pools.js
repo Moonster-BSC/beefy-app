@@ -3,7 +3,7 @@ const elkPools = [
     id: 'elk-matic-elk',
     logo: 'polygon/elk/MATIC-ELK.png',
     name: 'MATIC-ELK LP',
-    token: 'MATIC-ELK QLP',
+    token: 'MATIC-ELK ELP',
     tokenDescription: 'Elk',
     tokenAddress: '0xa7c7d39c5102b65557c7c494d033385215652e11',
     tokenDecimals: 18,
