@@ -1,7 +1,7 @@
 const elkPools = [
   {
     id: 'elk-matic-elk',
-    logo: 'polygon/AAVE-ETH.png', //TODO
+    logo: 'polygon/elk/MATIC-ELK.png',
     name: 'MATIC-ELK LP',
     token: 'MATIC-ELK QLP',
     tokenDescription: 'Elk',
@@ -22,9 +22,9 @@ const elkPools = [
     assets: ['MATIC', 'ELK'],
     callFee: 0.5,
     addLiquidityUrl:
-      'https://quickswap.exchange/#/add/0xD6DF932A45C0f255f85145f286eA0b292B21C90B/0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619',
+      'https://app.elk.finance/#/add/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270/0xe1c8f3d529bea8e3fa1fac5b416335a2f998ee1c',
     buyTokenUrl:
-      'https://quickswap.exchange/#/swap?inputCurrency=0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39&outputCurrency=ETH',
+      'https://app.elk.finance/#/swap?inputCurrency=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270&outputCurrency=0xe1c8f3d529bea8e3fa1fac5b416335a2f998ee1c',
   }
 ]  
  
