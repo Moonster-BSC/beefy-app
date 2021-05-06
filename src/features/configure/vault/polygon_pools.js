@@ -25,7 +25,34 @@ const elkPools = [
       'https://app.elk.finance/#/add/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270/0xe1c8f3d529bea8e3fa1fac5b416335a2f998ee1c',
     buyTokenUrl:
       'https://app.elk.finance/#/swap?inputCurrency=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270&outputCurrency=0xe1c8f3d529bea8e3fa1fac5b416335a2f998ee1c',
-  }
+  },
+  {
+    id: 'elk-usdc-elk',
+    logo: 'polygon/elk/USDC-ELK.png',
+    name: 'USDC-ELK LP',
+    token: 'USDC-ELK ELP',
+    tokenDescription: 'Elk',
+    tokenAddress: '0xaE577Ce0C78A6c20f208c5C393EB5FBC61dF6E8d',
+    tokenDecimals: 18,
+    tokenDescriptionUrl: '#',
+    earnedToken: 'mooElkUSDC-ELK',
+    earnedTokenAddress: '0x2210a6aB8667ED24842fea0Ab617821783CA8E95',
+    earnContractAddress: '0x2210a6aB8667ED24842fea0Ab617821783CA8E95',
+    pricePerFullShare: 1,
+    tvl: 0,
+    oracle: 'lps',
+    oracleId: 'elk-USDC-elk',
+    oraclePrice: 0,
+    depositsPaused: false,
+    status: 'active',
+    platform: 'Elk',
+    assets: ['USDC', 'ELK'],
+    callFee: 0.5,
+    addLiquidityUrl:
+      'https://app.elk.finance/#/add/0x2791bca1f2de4661ed88a30c99a7a9449aa84174/0xe1c8f3d529bea8e3fa1fac5b416335a2f998ee1c',
+    buyTokenUrl:
+      'https://app.elk.finance/#/swap?inputCurrency=0x2791bca1f2de4661ed88a30c99a7a9449aa84174&outputCurrency=0xe1c8f3d529bea8e3fa1fac5b416335a2f998ee1c',
+  },
 ]  
 
 export const polygonPools = [
