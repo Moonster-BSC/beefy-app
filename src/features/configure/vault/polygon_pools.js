@@ -26,6 +26,33 @@ export const polygonPools = [
       'https://quickswap.exchange/#/swap?inputCurrency=0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619&outputCurrency=0xfbdd194376de19a88118e84e279b977f165d01b8',
   },
   {
+    id: 'polypup-wmatic-pup',
+    name: 'PUP-WMATIC QLP',
+    token: 'PUP-WMATIC QLP',
+    tokenDescription: 'Polypup',
+    tokenAddress: '0xBC68d2A5920c4ffaEa20E2BE48a0E09055481976',
+    tokenDecimals: 18,
+    tokenDescriptionUrl: '#',
+    earnedToken: 'mooPolypupWMATIC-PUP',
+    earnedTokenAddress: '0x37884333d34eeE3EAe83439CE4608E69E7081116',
+    earnContractAddress: '0x37884333d34eeE3EAe83439CE4608E69E7081116',
+    pricePerFullShare: 1,
+    tvl: 0,
+    oracle: 'lps',
+    oracleId: 'polypup-wmatic-pup',
+    oraclePrice: 0,
+    depositsPaused: true,
+    status: 'active',
+    platform: 'Polypup',
+    assets: ['PUP', 'MATIC'],
+    callFee: 0.5,
+    addLiquidityUrl:
+      'https://quickswap.exchange/#/add/0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270/0xcFe2cF35D2bDDE84967e67d00aD74237e234CE59',
+    buyTokenUrl:
+      'https://quickswap.exchange/#/swap?inputCurrency=0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270&outputCurrency=0xcFe2cF35D2bDDE84967e67d00aD74237e234CE59',
+  },
+  //
+  {
     id: 'ape-matic-usdt',
     name: 'MATIC-USDT ALP',
     token: 'MATIC-USDT ALP',
