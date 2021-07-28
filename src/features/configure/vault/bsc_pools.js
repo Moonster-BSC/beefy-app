@@ -50,8 +50,8 @@ export const bscPools = [
   },
   {
     id: 'farmhero-pancake-hero-wbnb',
-    name: 'HERO-USDC LP',
-    token: 'HERO-USDC LP',
+    name: 'HERO-WBNB LP',
+    token: 'HERO-WBNB LP',
     tokenDescription: 'FarmHero (Pancakeswap)',
     tokenAddress: '0x35BC504e05fa91f17552A9c3a6A2E7E9651A0622',
     tokenDecimals: 18,
