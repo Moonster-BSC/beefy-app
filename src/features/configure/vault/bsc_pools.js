@@ -50,8 +50,8 @@ export const bscPools = [
   },
   {
     id: 'farmhero-pancake-hero-wbnb',
-    name: 'HERO-WBNB LP',
-    token: 'HERO-WBNB LP',
+    name: 'HERO-BNB LP',
+    token: 'HERO-BNB LP',
     tokenDescription: 'FarmHero (Pancakeswap)',
     tokenAddress: '0x35BC504e05fa91f17552A9c3a6A2E7E9651A0622',
     tokenDecimals: 18,
@@ -67,7 +67,7 @@ export const bscPools = [
     depositsPaused: false,
     status: 'active',
     platform: 'FarmHero',
-    assets: ['HERO', 'WBNB'],
+    assets: ['HERO', 'BNB'],
     callFee: 0.5,
     addLiquidityUrl:
       'https://exchange.pancakeswap.finance/#/add/0x9B26e16377ad29A6CCC01770bcfB56DE3A36d8b2/0xbb4CdB9CBd36B01bD1cBaEBF2De08d9173bc095c',
