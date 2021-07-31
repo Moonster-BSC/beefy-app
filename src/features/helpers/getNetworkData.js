@@ -60,6 +60,22 @@ const networkBuyUrls = {
   43114: 'https://app.1inch.io/#/r/0xF4cb25a1FF50E319c267b3E51CBeC2699FB2A43B',
 };
 
+export const getCurrentNetwork = () => {
+  const NETWORK_STORAGE = 'networkStorage';
+  // default bsc
+  let network = 56;
+  if (localStorage) {
+    try {
+      const storedNetwork = JSON.parse(localStorage.getItem(NETWORK_STORAGE));
+      if (!storedNetwork) {
+        return network;
+      } else {
+        return parseInt(storedNetwork);
+      }
+    } catch (e) {}
+  }
+};
+
 export const getNetworkCoin = () => {
   return nativeCoins.find(coin => coin.chainId === appNetworkId);
 };
