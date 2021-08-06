@@ -25,7 +25,7 @@ export function fetchBalances({ address, web3, currentNetwork }) {
     const tokens = getNetworkTokens(networkId);
 
     const promise = new Promise((resolve, reject) => {
-      const multicall = new MultiCall(web3, getNetworkMulticall());
+      const multicall = new MultiCall(web3, getNetworkMulticall(networkId));
 
       const balanceCalls = [];
       const allowanceCalls = [];
