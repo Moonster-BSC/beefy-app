@@ -35,7 +35,6 @@ const useStyles = makeStyles(styles);
 
 const WithdrawSection = ({ pool, index, sharesBalance }) => {
   const { t } = useTranslation();
-  const { currentNetwork } = useNetworks();
   const classes = useStyles();
   const { web3, address } = useConnectWallet();
   const { enqueueSnackbar } = useSnackbar();
@@ -49,8 +48,10 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
   } = useFetchWithdraw();
   const { fetchZapWithdrawEstimate, fetchZapEstimatePending } = useFetchZapEstimate();
   const { tokens, fetchBalances, fetchPairReverves } = useFetchBalances();
+  const { currentNetwork } = useNetworks();
+  const networkId = currentNetwork.id;
 
-  const nativeCoin = getNetworkCoin(currentNetwork.id);
+  const nativeCoin = getNetworkCoin(networkId);
 
   const sharesDecimals = pool.tokenDecimals;
   const sharesByDecimals = byDecimals(sharesBalance, sharesDecimals);
@@ -271,7 +272,7 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
         fetchZapWithdrawAndSwap(zapWithdrawArgs)
           .then(() => {
             enqueueSnackbar(t('Vault-WithdrawSuccess'), { variant: 'success' });
-            fetchBalances({ address, web3, tokens });
+            fetchBalances({ address, web3, currentNetwork });
           })
           .catch(error =>
             enqueueSnackbar(t('Vault-WithdrawError', { error }), { variant: 'error' })
@@ -287,7 +288,7 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
         fetchZapWithdrawAndRemoveLiquidity(zapWithdrawArgs)
           .then(() => {
             enqueueSnackbar(t('Vault-WithdrawSuccess'), { variant: 'success' });
-            fetchBalances({ address, web3, tokens });
+            fetchBalances({ address, web3, currentNetwork });
           })
           .catch(error =>
             enqueueSnackbar(t('Vault-WithdrawError', { error }), { variant: 'error' })
@@ -306,7 +307,7 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
         fetchWithdraw(vaultWithdrawArgs)
           .then(() => {
             enqueueSnackbar(t('Vault-WithdrawSuccess'), { variant: 'success' });
-            fetchBalances({ address, web3, tokens });
+            fetchBalances({ address, web3, currentNetwork });
           })
           .catch(error =>
             enqueueSnackbar(t('Vault-WithdrawError', { error }), { variant: 'error' })
@@ -315,7 +316,7 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
         fetchWithdrawBnb(vaultWithdrawArgs)
           .then(() => {
             enqueueSnackbar(t('Vault-WithdrawSuccess'), { variant: 'success' });
-            fetchBalances({ address, web3, tokens });
+            fetchBalances({ address, web3, currentNetwork });
           })
           .catch(error =>
             enqueueSnackbar(t('Vault-WithdrawError', { error }), { variant: 'error' })

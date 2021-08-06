@@ -21,6 +21,14 @@ const usePoolsTvl = pools => {
   return { poolsTvl };
 };
 
+const getEarnedTokenBalance = (pool, tokens) => {
+  let tokenBalance = new BigNumber(0);
+  if (tokens[pool.token] && tokens[pool.token].tokenBalance) {
+    tokenBalance = new BigNumber(tokens[pool.token].tokenBalance);
+  }
+  return tokenBalance;
+};
+
 const useUserTvl = (pools, tokens) => {
   const [userTvl, setUserTvl] = useState(0);
 
@@ -28,7 +36,8 @@ const useUserTvl = (pools, tokens) => {
     let userTvl = 0;
 
     pools.filter(isUniqueEarnContract).forEach(pool => {
-      const sharesBalance = new BigNumber(tokens[pool.earnedToken].tokenBalance);
+      const earnedTokenBalance = getEarnedTokenBalance(pool, tokens);
+      const sharesBalance = new BigNumber(earnedTokenBalance);
       if (sharesBalance > 0) {
         const deposited = byDecimals(
           sharesBalance.multipliedBy(new BigNumber(pool.pricePerFullShare)),

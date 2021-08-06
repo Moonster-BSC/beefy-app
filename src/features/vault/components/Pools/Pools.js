@@ -48,7 +48,7 @@ export default function Pools() {
   useEffect(() => {
     const fetch = () => {
       if (address && web3 && !fetchBalancesPending) {
-        fetchBalances({ address, web3, tokens });
+        fetchBalances({ address, web3, currentNetwork });
       }
       if (!fetchVaultsDataPending) {
         fetchVaultsData({ web3, currentNetwork });

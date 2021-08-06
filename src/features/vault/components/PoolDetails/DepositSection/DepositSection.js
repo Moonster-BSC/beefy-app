@@ -24,6 +24,7 @@ import { shouldHideFromHarvest } from 'features/helpers/utils';
 import { convertAmountToRawNumber, convertAmountFromRawNumber } from 'features/helpers/bignumber';
 import Button from 'components/CustomButtons/Button.js';
 import styles from './styles';
+import { useNetworks } from '../../../../home/hooks/useNetworks';
 
 const useStyles = makeStyles(styles);
 
@@ -37,6 +38,7 @@ const DepositSection = ({ pool }) => {
   const { fetchZapDeposit } = useFetchZapDeposit();
   const { tokens, tokenBalance, fetchBalances } = useFetchBalances();
   const { fetchZapDepositEstimate, fetchZapEstimatePending } = useFetchZapEstimate();
+  const { currentNetwork } = useNetworks();
 
   const { zap, eligibleTokens } = useMemo(() => {
     const zap = pool.zap;
@@ -53,7 +55,7 @@ const DepositSection = ({ pool }) => {
         ...(zap ? zap.tokens : []),
       ],
     };
-  }, [pool.tokenAddress]);
+  }, [pool.logo, pool.name, pool.token, pool.tokenAddress, pool.tokenDecimals, pool.zap]);
 
   const [depositSettings, setDepositSettings] = useState({
     tokenIndex: 0,
@@ -95,7 +97,7 @@ const DepositSection = ({ pool }) => {
       ...prevState,
       isNeedApproval: allowance.isZero() || prevState.amount.isGreaterThan(allowance),
     }));
-  }, [tokens[depositSettings.token.symbol].allowance[depositSettings.depositAddress]]);
+  }, [depositSettings.depositAddress, depositSettings.token.symbol, tokens]);
 
   useEffect(() => {
     if (address && web3 && zap) {
@@ -111,9 +113,9 @@ const DepositSection = ({ pool }) => {
           ...tokens[token.symbol],
         };
       });
-      fetchBalances({ address, web3, tokens });
+      fetchBalances({ address, web3, currentNetwork });
     }
-  }, [address, web3, fetchBalances]);
+  }, [address, web3, fetchBalances, zap, eligibleTokens, currentNetwork]);
 
   const handleTokenChange = event => {
     const isZap = event.target.value > 0;

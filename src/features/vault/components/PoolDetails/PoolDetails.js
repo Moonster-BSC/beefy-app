@@ -65,7 +65,7 @@ const PoolDetails = ({ vaultId }) => {
   useEffect(() => {
     const fetch = () => {
       if (address && web3) {
-        fetchBalances({ address, web3, tokens });
+        fetchBalances({ address, web3 });
       }
       fetchVaultsData({ web3, currentNetwork });
       fetchApys();

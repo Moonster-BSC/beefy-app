@@ -9,14 +9,20 @@ import { MultiCall } from 'eth-multicall';
 import { erc20ABI, multicallABI, uniswapV2PairABI } from 'features/configure';
 import { byDecimals } from 'features/helpers/bignumber';
 import { getNetworkMulticall } from 'features/helpers/getNetworkData';
+import { getNetworkTokens } from 'features/helpers/getNetworkData';
+import BigNumber from 'bignumber.js';
 
-export function fetchBalances({ address, web3, tokens }) {
+export function fetchBalances({ address, web3, currentNetwork }) {
   return dispatch => {
     if (!(address && web3)) return;
 
     dispatch({
       type: VAULT_FETCH_BALANCES_BEGIN,
     });
+
+    const networkId = currentNetwork.id;
+
+    const tokens = getNetworkTokens(networkId);
 
     const promise = new Promise((resolve, reject) => {
       const multicall = new MultiCall(web3, getNetworkMulticall());
@@ -155,7 +161,14 @@ export function useFetchBalances() {
   );
 
   const tokenBalance = tokenSymbol => {
-    return byDecimals(tokens[tokenSymbol]?.tokenBalance || 0, tokens[tokenSymbol].decimals);
+    let tokenBalance = new BigNumber(0);
+    if (tokens[tokenSymbol] && tokens[tokenSymbol].tokenBalance) {
+      tokenBalance = byDecimals(
+        tokens[tokenSymbol]?.tokenBalance || 0,
+        tokens[tokenSymbol].decimals
+      );
+    }
+    return tokenBalance;
   };
 
   const boundPairReverves = useCallback(
