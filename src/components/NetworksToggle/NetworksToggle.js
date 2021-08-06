@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { getSingleAssetSrc } from '../../features/helpers/getSingleAssetSrc';
-import { useNetworks } from '../NetworksProvider/NetworksProvider';
+import { useNetworks } from '../../features/home/hooks/useNetworks';
 
 import styles from './styles';
 

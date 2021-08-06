@@ -14,7 +14,7 @@ import { usePoolsTvl, useUserTvl } from '../../hooks/usePoolsTvl';
 import { formatGlobalTvl } from 'features/helpers/format';
 import { useFetchBifibuyback } from 'features/vault/redux/fetchBifiBuyback';
 import { getNetworkFriendlyName } from '../../../helpers/getNetworkData';
-import { useNetworks } from 'components/NetworksProvider/NetworksProvider';
+import { useNetworks } from '../../../home/hooks/useNetworks';
 
 const FETCH_INTERVAL_MS = 15 * 1000;
 

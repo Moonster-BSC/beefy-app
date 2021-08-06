@@ -26,7 +26,7 @@ import {
   usePoolApr,
 } from '../../../stake/redux/hooks';
 import { PoolBoosts } from '../PoolSummary/PoolBoosts/PoolBoosts';
-import { useNetworks } from 'components/NetworksProvider/NetworksProvider';
+import { useNetworks } from '../../../home/hooks/useNetworks';
 import { getRetireReason } from '../PoolSummary/RetireReason/RetireReason';
 
 const FETCH_INTERVAL_MS = 30 * 1000;

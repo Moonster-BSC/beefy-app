@@ -29,7 +29,7 @@ import {
 import { useConnectWallet } from 'features/home/redux/hooks';
 import { getNetworkCoin } from 'features/helpers/getNetworkData';
 import styles from './styles';
-import { useNetworks } from 'components/NetworksProvider/NetworksProvider';
+import { useNetworks } from '../../../../home/hooks/useNetworks';
 
 const useStyles = makeStyles(styles);
 

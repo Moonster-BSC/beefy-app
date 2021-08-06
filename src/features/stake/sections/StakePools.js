@@ -8,7 +8,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { ToggleButton, ToggleButtonGroup } from '@material-ui/lab';
 import { useLaunchpoolUpdates } from '../redux/hooks';
 import { launchpools } from '../../helpers/getNetworkData';
-import { useNetworks } from 'components/NetworksProvider/NetworksProvider';
+import { useNetworks } from '../../home/hooks/useNetworks';
 import { StakePoolsPool } from './StakePoolsPool';
 
 const useStyles = makeStyles(styles);

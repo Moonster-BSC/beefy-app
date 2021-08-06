@@ -21,11 +21,13 @@ export function fetchVaultsData({ web3, currentNetwork }) {
       type: VAULT_FETCH_VAULTS_DATA_BEGIN,
     });
 
-    const pools = getNetworkPools(currentNetwork.id);
+    const networkId = currentNetwork.id;
+
+    const pools = getNetworkPools(networkId);
 
     if (!web3) {
       // setup default provider to get vault data
-      web3 = new Web3(new Web3.providers.HttpProvider(getRpcUrl(currentNetwork.id)));
+      web3 = new Web3(new Web3.providers.HttpProvider(getRpcUrl(networkId)));
     }
 
     const promise = new Promise((resolve, reject) => {
@@ -48,7 +50,7 @@ export function fetchVaultsData({ web3, currentNetwork }) {
             return {
               pricePerFullShare: new BigNumber(pricePerFullShare).toNumber() || 1,
               tvl: byDecimals(data[0][i].tvl, pool.tokenDecimals).toNumber(),
-              oraclePrice: fetchPrice({ id: pool.oracleId }) || 0,
+              oraclePrice: fetchPrice({ id: pool.oracleId, networkId }) || 0,
             };
           });
           dispatch({

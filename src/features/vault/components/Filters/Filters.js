@@ -11,7 +11,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { Avatar, Box, Button } from '@material-ui/core';
-import { useNetworks } from 'components/NetworksProvider/NetworksProvider';
+import { useNetworks } from '../../../home/hooks/useNetworks';
 
 import styles from './styles';
 import { getUniquePlatforms, getUniqueAssets } from './constants';
