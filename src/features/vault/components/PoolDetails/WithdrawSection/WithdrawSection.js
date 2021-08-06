@@ -29,12 +29,13 @@ import {
 import { useConnectWallet } from 'features/home/redux/hooks';
 import { getNetworkCoin } from 'features/helpers/getNetworkData';
 import styles from './styles';
+import { useNetworks } from 'components/NetworksProvider/NetworksProvider';
 
 const useStyles = makeStyles(styles);
-const nativeCoin = getNetworkCoin();
 
 const WithdrawSection = ({ pool, index, sharesBalance }) => {
   const { t } = useTranslation();
+  const { currentNetwork } = useNetworks();
   const classes = useStyles();
   const { web3, address } = useConnectWallet();
   const { enqueueSnackbar } = useSnackbar();
@@ -48,6 +49,8 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
   } = useFetchWithdraw();
   const { fetchZapWithdrawEstimate, fetchZapEstimatePending } = useFetchZapEstimate();
   const { tokens, fetchBalances, fetchPairReverves } = useFetchBalances();
+
+  const nativeCoin = getNetworkCoin(currentNetwork.id);
 
   const sharesDecimals = pool.tokenDecimals;
   const sharesByDecimals = byDecimals(sharesBalance, sharesDecimals);
@@ -78,7 +81,15 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
     }
 
     return outputs;
-  }, [pool.tokenAddress]);
+  }, [
+    nativeCoin.wrappedSymbol,
+    pool.assets,
+    pool.name,
+    pool.token,
+    pool.tokenAddress,
+    pool.tokenDecimals,
+    pool.zap,
+  ]);
 
   const [withdrawSettings, setWithdrawSettings] = useState({
     isZap: false,
@@ -206,7 +217,7 @@ const WithdrawSection = ({ pool, index, sharesBalance }) => {
       ...prevState,
       isNeedApproval: prevState.isZap && allowance.isZero(),
     }));
-  }, [tokens[pool.earnedToken].allowance[withdrawSettings.withdrawAddress]]);
+  }, [pool.earnedToken, tokens, withdrawSettings.withdrawAddress]);
 
   const handleApproval = () => {
     fetchApproval({

@@ -1,3 +1,4 @@
+import useNetworkIdStorage from 'features/home/hooks/useNetworkIdStorage';
 import React, { createContext, useContext, useState, useMemo } from 'react';
 
 export const NetworksContext = createContext(null);
@@ -40,9 +41,13 @@ const NetworksProvider = ({ children }) => {
     },
   ];
 
+  const { getStorage } = useNetworkIdStorage();
+
+  const networkId = getStorage();
+
   const currentNetwork = useMemo(
-    () => networks.find(network => network.id === process.env.REACT_APP_NETWORK_ID),
-    [networks]
+    () => networks.find(network => network.id === networkId),
+    [networks, networkId]
   );
 
   return (

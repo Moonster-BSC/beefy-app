@@ -14,6 +14,7 @@ import { usePoolsTvl, useUserTvl } from '../../hooks/usePoolsTvl';
 import { formatGlobalTvl } from 'features/helpers/format';
 import { useFetchBifibuyback } from 'features/vault/redux/fetchBifiBuyback';
 import { getNetworkFriendlyName } from '../../../helpers/getNetworkData';
+import { useNetworks } from 'components/NetworksProvider/NetworksProvider';
 
 const FETCH_INTERVAL_MS = 15 * 1000;
 
@@ -21,6 +22,7 @@ const useStyles = makeStyles(styles);
 
 export default function Pools() {
   const { t } = useTranslation();
+  const { currentNetwork } = useNetworks();
   const { web3, address } = useConnectWallet();
   const { pools, fetchVaultsData, fetchVaultsDataPending, fetchVaultsDataDone } =
     useFetchVaultsData();
@@ -49,7 +51,7 @@ export default function Pools() {
         fetchBalances({ address, web3, tokens });
       }
       if (!fetchVaultsDataPending) {
-        fetchVaultsData({ web3, pools });
+        fetchVaultsData({ web3, pools, currentNetwork });
       }
     };
     fetch();

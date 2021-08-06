@@ -82,7 +82,7 @@ export const networkSetup = chainId => {
   });
 };
 
-export const getRpcUrl = () => {
-  const settings = networkSettings[process.env.REACT_APP_NETWORK_ID];
+export const getRpcUrl = networkId => {
+  const settings = networkSettings[networkId];
   return settings.rpcUrls[~~(settings.rpcUrls.length * Math.random())];
 };

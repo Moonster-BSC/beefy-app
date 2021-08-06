@@ -14,7 +14,7 @@ import { getNetworkMulticall } from 'features/helpers/getNetworkData';
 import Web3 from 'web3';
 import { getRpcUrl } from 'common/networkSetup';
 
-export function fetchVaultsData({ web3, pools }) {
+export function fetchVaultsData({ web3, pools, currentNetwork }) {
   return dispatch => {
     dispatch({
       type: VAULT_FETCH_VAULTS_DATA_BEGIN,
@@ -22,7 +22,7 @@ export function fetchVaultsData({ web3, pools }) {
 
     if (!web3) {
       // setup default provider to get vault data
-      web3 = new Web3(new Web3.providers.HttpProvider(getRpcUrl()));
+      web3 = new Web3(new Web3.providers.HttpProvider(getRpcUrl(currentNetwork.id)));
     }
 
     const promise = new Promise((resolve, reject) => {

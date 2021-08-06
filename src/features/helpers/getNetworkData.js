@@ -26,8 +26,6 @@ import {
   polygonZaps,
 } from '../configure';
 
-export const appNetworkId = Number(process.env.REACT_APP_NETWORK_ID);
-
 const networkTxUrls = {
   56: hash => `https://bscscan.com/tx/${hash}`,
   128: hash => `https://hecoinfo.com/tx/${hash}`,
@@ -60,24 +58,8 @@ const networkBuyUrls = {
   43114: 'https://app.1inch.io/#/r/0xF4cb25a1FF50E319c267b3E51CBeC2699FB2A43B',
 };
 
-export const getCurrentNetwork = () => {
-  const NETWORK_STORAGE = 'networkStorage';
-  // default bsc
-  let network = 56;
-  if (localStorage) {
-    try {
-      const storedNetwork = JSON.parse(localStorage.getItem(NETWORK_STORAGE));
-      if (!storedNetwork) {
-        return network;
-      } else {
-        return parseInt(storedNetwork);
-      }
-    } catch (e) {}
-  }
-};
-
-export const getNetworkCoin = () => {
-  return nativeCoins.find(coin => coin.chainId === appNetworkId);
+export const getNetworkCoin = networkId => {
+  return nativeCoins.find(coin => coin.chainId === networkId);
 };
 
 export const getNetworkPools = () => {
@@ -97,7 +79,7 @@ export const getNetworkPools = () => {
   }
 };
 
-export const getNetworkVaults = (networkId = appNetworkId) => {
+export const getNetworkVaults = networkId => {
   switch (networkId) {
     case 56:
       return indexBy(bscPools, 'id');
@@ -114,7 +96,7 @@ export const getNetworkVaults = (networkId = appNetworkId) => {
   }
 };
 
-export const getNetworkLaunchpools = (networkId = appNetworkId) => {
+export const getNetworkLaunchpools = networkId => {
   switch (networkId) {
     case 56:
       return indexBy(bscStakePools, 'id');

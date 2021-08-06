@@ -26,6 +26,7 @@ import {
   usePoolApr,
 } from '../../../stake/redux/hooks';
 import { PoolBoosts } from '../PoolSummary/PoolBoosts/PoolBoosts';
+import { useNetworks } from 'components/NetworksProvider/NetworksProvider';
 
 const FETCH_INTERVAL_MS = 30 * 1000;
 
@@ -37,6 +38,7 @@ const formatDecimals = number => {
 
 const PoolDetails = ({ vaultId }) => {
   const classes = useStyles();
+  const { currentNetwork } = useNetworks();
   const { t } = useTranslation();
   const { web3, address } = useConnectWallet();
   const { pools, fetchVaultsData, fetchVaultsDataDone } = useFetchVaultsData();
@@ -64,7 +66,7 @@ const PoolDetails = ({ vaultId }) => {
       if (address && web3) {
         fetchBalances({ address, web3, tokens });
       }
-      fetchVaultsData({ address, web3, pools });
+      fetchVaultsData({ web3, pools, currentNetwork });
       fetchApys();
     };
     fetch();
