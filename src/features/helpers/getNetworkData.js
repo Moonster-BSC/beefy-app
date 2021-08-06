@@ -94,7 +94,10 @@ export const getNetworkPools = networkId => {
     if (!pool.depositFee) pool.depositFee = '0%';
 
     const zap = getEligibleZap(pool, networkId);
+    pool['zap'] = zap;
   });
+
+  return updatedPools;
 };
 
 export const getNetworkVaults = networkId => {

@@ -162,7 +162,10 @@ const subscriptionCallbacks = {
 
     await whenPricesLoaded();
 
-    const rewardTokenPrice = fetchPrice({ id: pool.earnedOracleId });
+    // TODO how to get networkId here?
+    const networkId = 56;
+
+    const rewardTokenPrice = fetchPrice({ id: pool.earnedOracleId, networkId });
     const rewardTokenDecimals = new BigNumber(10).exponentiatedBy(pool.earnedTokenDecimals);
     const rewardRate = new BigNumber(data.poolRewardRate);
     const rewardYearly = rewardRate.times(3600).times(24).times(365);

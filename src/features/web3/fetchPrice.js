@@ -17,13 +17,13 @@ function getCachedPrice(id) {
   return priceCache.cache.get(id);
 }
 
-function maybeUpdateCache() {
+function maybeUpdateCache(networkId) {
   const currentTimestamp = new Date();
   if (
     priceCache.lastUpdated &&
     currentTimestamp.getTime() > priceCache.lastUpdated.getTime() + CACHE_TIMEOUT_MS
   ) {
-    initializePriceCache();
+    initializePriceCache(networkId);
     // console.trace('price cache updated')
   }
 }
@@ -98,13 +98,13 @@ export function initializePriceCache(networkId) {
   });
 }
 
-export const fetchPrice = ({ id }) => {
+export const fetchPrice = ({ id, networkId }) => {
   if (id === undefined) {
     console.error('Undefined pair');
     return 0;
   }
 
-  maybeUpdateCache();
+  maybeUpdateCache(networkId);
 
   return getCachedPrice(id) || 0;
 };
