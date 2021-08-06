@@ -7,27 +7,27 @@ const networks = {
   56: {
     name: 'BSC',
     asset: 'BNB',
-    id: '56',
+    id: 56,
   },
   128: {
     name: 'HECO',
     asset: 'HECO',
-    id: '128',
+    id: 128,
   },
   43114: {
     name: 'AVALANCHE',
     asset: 'AVAX',
-    id: '43114',
+    id: 43114,
   },
   137: {
     name: 'POLYGON',
     asset: 'POLYGON',
-    id: '137',
+    id: 137,
   },
   250: {
     name: 'FANTOM',
     asset: 'FANTOM',
-    id: '250',
+    id: 250,
   },
 };
 

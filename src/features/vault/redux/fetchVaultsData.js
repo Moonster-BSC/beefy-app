@@ -31,7 +31,7 @@ export function fetchVaultsData({ web3, currentNetwork }) {
     }
 
     const promise = new Promise((resolve, reject) => {
-      const multicall = new MultiCall(web3, getNetworkMulticall());
+      const multicall = new MultiCall(web3, getNetworkMulticall(networkId));
       const vaultCalls = pools.map(pool => {
         const vault = new web3.eth.Contract(vaultABI, pool.earnedTokenAddress);
         return {
