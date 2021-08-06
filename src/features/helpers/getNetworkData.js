@@ -138,6 +138,7 @@ export const getNetworkBurnTokens = () => {
       return {
         [bscAddressBook.tokens.GARUDA.symbol]: bscAddressBook.tokens.GARUDA,
         [bscAddressBook.tokens.SDUMP.symbol]: bscAddressBook.tokens.SDUMP,
+        [bscAddressBook.tokens.BABYCAKE.symbol]: bscAddressBook.tokens.BABYCAKE,
       };
     case '128':
       return {};
@@ -196,7 +197,7 @@ export const getNetworkStables = () => {
     case '43114':
       return ['USDT', 'DAI', 'BUSD', 'zDAI', 'zUSDT'];
     case '137':
-      return ['USDC', 'USDT', 'maUSDC', 'DAI', 'IRON', 'MAI', 'FRAX', 'rUSD'];
+      return ['USDC', 'USDT', 'maUSDC', 'DAI', 'IRON', 'MAI', 'FRAX', 'rUSD', 'UST'];
     case '250':
       return ['USDC', 'USDT', 'DAI', 'fUSDT'];
     default:
