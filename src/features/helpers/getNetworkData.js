@@ -136,22 +136,79 @@ export const getNetworkLaunchpools = networkId => {
 };
 
 export const getNetworkTokens = networkId => {
+  let tokens = {};
   switch (networkId) {
     case 56:
-      return bscAddressBook.tokens;
+      tokens = bscAddressBook.tokens;
+      break;
     case 128:
-      return hecoAddressBook.tokens;
+      tokens = hecoAddressBook.tokens;
+      break;
     case 43114:
-      return avaxAddressBook.tokens;
+      tokens = avaxAddressBook.tokens;
+      break;
     case 137:
-      return polygonAddressBook.tokens;
+      tokens = polygonAddressBook.tokens;
+      break;
     case 250:
-      return fantomAddressBook.tokens;
+      tokens = fantomAddressBook.tokens;
+      break;
     default:
       throw new Error(
         `Create address book for this chainId first. Check out https://github.com/beefyfinance/address-book`
       );
   }
+
+  // fill in rest of info from state
+
+  const pools = getNetworkTokens(networkId);
+  pools.forEach(
+    (
+      {
+        token,
+        tokenDecimals,
+        tokenAddress,
+        earnedToken,
+        earnContractAddress,
+        earnedTokenAddress,
+        withdrawalFee,
+        depositFee,
+      },
+      i
+    ) => {
+      // if (!withdrawalFee) pools[i].withdrawalFee = '0.1%';
+      // if (!depositFee) pools[i].depositFee = '0%';
+
+      tokens[token] = {
+        symbol: token,
+        decimals: tokenDecimals,
+        tokenAddress: tokenAddress,
+        tokenBalance: 0,
+        allowance: {
+          ...tokens[token]?.allowance,
+          [earnContractAddress]: tokenAddress ? 0 : Infinity,
+        },
+      };
+      tokens[earnedToken] = {
+        symbol: earnedToken,
+        decimals: 18,
+        tokenAddress: earnedTokenAddress,
+        tokenBalance: 0,
+        allowance: {
+          [earnContractAddress]: 0,
+        },
+      };
+
+      const zap = getEligibleZap(pools[i], networkId);
+      if (zap) {
+        tokens[token].allowance[zap.zapAddress] = tokenAddress ? 0 : Infinity;
+        tokens[earnedToken].allowance[zap.zapAddress] = 0;
+        // pools[i]['zap'] = zap;
+      }
+    }
+  );
+
+  return tokens;
 };
 
 export const getNetworkBurnTokens = networkId => {
