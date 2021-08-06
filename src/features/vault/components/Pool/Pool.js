@@ -33,8 +33,12 @@ const Pool = ({
   let balanceSingle = new BigNumber(0);
   let sharesBalance = new BigNumber(0);
   if (pool.token in tokens) {
-    balanceSingle = byDecimals(tokens[pool.token].tokenBalance, pool.tokenDecimals);
-    sharesBalance = new BigNumber(tokens[pool.earnedToken].tokenBalance);
+    if (tokens[pool.token].tokenBalance) {
+      balanceSingle = byDecimals(tokens[pool.token].tokenBalance, pool.tokenDecimals);
+    }
+    if (tokens[pool.earnedToken].tokenBalance) {
+      sharesBalance = new BigNumber(tokens[pool.earnedToken].tokenBalance);
+    }
   }
   const launchpoolId = useSelector(state => state.vault.vaultLaunchpools[pool.id]);
   const launchpool = launchpoolId ? launchpools[launchpoolId] : null;
