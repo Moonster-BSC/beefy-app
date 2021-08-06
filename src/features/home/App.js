@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { makeStyles, ThemeProvider, StylesProvider } from '@material-ui/core/styles';
 import Header from 'components/Header/Header';
 import HeaderLinks from 'components/HeaderLinks/HeaderLinks';
-import NetworksProvider from 'components/NetworksProvider/NetworksProvider';
 import NetworksModal from 'components/NetworksModal/NetworksModal';
 import { useTranslation } from 'react-i18next';
 import { SnackbarProvider } from 'notistack';
@@ -26,6 +25,7 @@ export default function App({ children }) {
   const { t } = useTranslation();
   const { connectWallet, web3, address, networkId, connected } = useConnectWallet();
   const { disconnectWallet } = useDisconnectWallet();
+
   const [web3Modal, setModal] = useState(null);
 
   const { isNightMode, setNightMode } = useNightMode();
@@ -59,40 +59,38 @@ export default function App({ children }) {
     <StylesProvider injectFirst>
       <ThemeProvider theme={theme}>
         <SnackbarProvider>
-          <NetworksProvider>
-            <NetworksModal />
-            <div className={classes.page}>
-              <Header
-                links={
-                  <HeaderLinks
-                    address={address}
-                    connected={connected}
-                    connectWallet={connectWalletCallback}
-                    disconnectWallet={disconnectWalletCallback}
-                    isNightMode={isNightMode}
-                    setNightMode={() => setNightMode(!isNightMode)}
-                  />
-                }
-                isNightMode={isNightMode}
-                setNightMode={() => setNightMode(!isNightMode)}
-              />
-              <div className={classes.container}>
-                <div className={classes.children}>
-                  <NetworkConnectNotice
-                    web3={web3}
-                    address={address}
-                    connectWallet={connectWalletCallback}
-                    disconnectWallet={disconnectWalletCallback}
-                    networkId={networkId}
-                  />
-                  {networkId === Number(process.env.REACT_APP_NETWORK_ID) ? children : null}
-                  <Notifier />
-                </div>
+          <NetworksModal />
+          <div className={classes.page}>
+            <Header
+              links={
+                <HeaderLinks
+                  address={address}
+                  connected={connected}
+                  connectWallet={connectWalletCallback}
+                  disconnectWallet={disconnectWalletCallback}
+                  isNightMode={isNightMode}
+                  setNightMode={() => setNightMode(!isNightMode)}
+                />
+              }
+              isNightMode={isNightMode}
+              setNightMode={() => setNightMode(!isNightMode)}
+            />
+            <div className={classes.container}>
+              <div className={classes.children}>
+                <NetworkConnectNotice
+                  web3={web3}
+                  address={address}
+                  connectWallet={connectWalletCallback}
+                  disconnectWallet={disconnectWalletCallback}
+                  networkId={networkId}
+                />
+                {networkId === Number(process.env.REACT_APP_NETWORK_ID) ? children : null}
+                <Notifier />
               </div>
-              <Footer />
-              <Pastures />
             </div>
-          </NetworksProvider>
+            <Footer />
+            <Pastures />
+          </div>
         </SnackbarProvider>
       </ThemeProvider>
     </StylesProvider>

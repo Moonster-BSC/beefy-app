@@ -67,19 +67,19 @@ export const getNetworkCoin = networkId => {
 export const getNetworkPools = networkId => {
   let pools = [];
   switch (networkId) {
-    case '56':
+    case 56:
       pools = bscPools;
       break;
-    case '128':
+    case 128:
       pools = hecoPools;
       break;
-    case '43114':
+    case 43114:
       pools = avalanchePools;
       break;
-    case '137':
+    case 137:
       pools = polygonPools;
       break;
-    case '250':
+    case 250:
       pools = fantomPools;
       break;
     default:
@@ -89,12 +89,13 @@ export const getNetworkPools = networkId => {
 
   // fill in missing data, like used to happen in init state
 
-  const updatedPools = pools.forEach(pool => {
+  const updatedPools = pools.map(pool => {
     if (!pool.withdrawalFee) pool.withdrawalFee = '0.1%';
     if (!pool.depositFee) pool.depositFee = '0%';
 
     const zap = getEligibleZap(pool, networkId);
     pool['zap'] = zap;
+    return pool;
   });
 
   return updatedPools;
@@ -136,15 +137,15 @@ export const getNetworkLaunchpools = networkId => {
 
 export const getNetworkTokens = networkId => {
   switch (networkId) {
-    case '56':
+    case 56:
       return bscAddressBook.tokens;
-    case '128':
+    case 128:
       return hecoAddressBook.tokens;
-    case '43114':
+    case 43114:
       return avaxAddressBook.tokens;
-    case '137':
+    case 137:
       return polygonAddressBook.tokens;
-    case '250':
+    case 250:
       return fantomAddressBook.tokens;
     default:
       throw new Error(
@@ -155,21 +156,21 @@ export const getNetworkTokens = networkId => {
 
 export const getNetworkBurnTokens = networkId => {
   switch (networkId) {
-    case '56':
+    case 56:
       return {
         [bscAddressBook.tokens.GARUDA.symbol]: bscAddressBook.tokens.GARUDA,
         [bscAddressBook.tokens.SDUMP.symbol]: bscAddressBook.tokens.SDUMP,
-        [bscAddressBook.tokens.BABYCAKE.symbol]: bscAddressBook.tokens.BABYCAKE,
+        // [bscAddressBook.tokens.BABYCAKE.symbol]: bscAddressBook.tokens.BABYCAKE,
       };
-    case '128':
+    case 128:
       return {};
-    case '43114':
+    case 43114:
       return {};
-    case '137':
+    case 137:
       return {
         [polygonAddressBook.tokens.xYELD.symbol]: polygonAddressBook.tokens.xYELD,
       };
-    case '250':
+    case 250:
       return {};
     default:
       throw new Error(`Create address book for this chainId first.`);
@@ -178,15 +179,15 @@ export const getNetworkBurnTokens = networkId => {
 
 export const getNetworkZaps = networkId => {
   switch (networkId) {
-    case '56':
+    case 56:
       return bscZaps;
-    case '128':
+    case 128:
       return hecoZaps;
-    case '43114':
+    case 43114:
       return avalancheZaps;
-    case '137':
+    case 137:
       return polygonZaps;
-    case '250':
+    case 250:
       return fantomZaps;
     default:
       return [];
@@ -195,7 +196,7 @@ export const getNetworkZaps = networkId => {
 
 export const getNetworkStables = networkId => {
   switch (networkId) {
-    case '56':
+    case 56:
       return [
         'BUSD',
         'USDT',
@@ -213,13 +214,13 @@ export const getNetworkStables = networkId => {
         'TUSD',
         'USDN',
       ];
-    case '128':
+    case 128:
       return ['USDT', 'HUSD'];
-    case '43114':
+    case 43114:
       return ['USDT', 'DAI', 'BUSD', 'zDAI', 'zUSDT'];
-    case '137':
+    case 137:
       return ['USDC', 'USDT', 'maUSDC', 'DAI', 'IRON', 'MAI', 'FRAX', 'rUSD', 'UST'];
-    case '250':
+    case 250:
       return ['USDC', 'USDT', 'DAI', 'fUSDT'];
     default:
       return [];
