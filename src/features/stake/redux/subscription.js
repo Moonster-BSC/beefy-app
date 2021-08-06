@@ -401,7 +401,7 @@ export function reducer(state, action) {
 // Exported so can be called on tx receipt (i.e. approval)
 export async function updatePools(dispatch, getState) {
   const { home, stake } = getState();
-  const { address: userAddress, web3: userWeb3 } = home;
+  const { address: userAddress, web3: userWeb3, networkId } = home;
   const { subscriptions } = stake;
   const hasAddress = userWeb3 && userAddress;
   const requestedCalls = {};
@@ -453,8 +453,8 @@ export async function updatePools(dispatch, getState) {
   }
 
   // Get RPC connection
-  const web3 = userWeb3 || new Web3(new Web3.providers.HttpProvider(getRpcUrl()));
-  const multicall = new MultiCall(web3, getNetworkMulticall());
+  const web3 = userWeb3 || new Web3(new Web3.providers.HttpProvider(getRpcUrl(networkId)));
+  const multicall = new MultiCall(web3, getNetworkMulticall(networkId));
 
   // Build groups of calls for multicall
   const allCalls = Object.entries(requestedCalls).map(([groupKey, groupContracts]) => {

@@ -1,13 +1,17 @@
 import { reducer as connectWalletReducer } from './connectWallet';
 import { reducer as disconnectWalletReducer } from './disconnectWallet';
+import useNetworkIdStorage from 'features/home/hooks/useNetworkIdStorage';
+
+const { getStorage } = useNetworkIdStorage();
 
 const reducers = [connectWalletReducer, disconnectWalletReducer];
+const initNetworkId = getStorage();
 
 const initialState = {
   address: '',
   web3: null,
   connected: false,
-  networkId: Number(process.env.REACT_APP_NETWORK_ID),
+  networkId: initNetworkId,
 };
 
 export default function reducer(state = initialState, action) {

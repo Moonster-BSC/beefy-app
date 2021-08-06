@@ -223,8 +223,8 @@ export const getNetworkStables = networkId => {
   }
 };
 
-export const getNetworkMulticall = () => {
-  switch (process.env.REACT_APP_NETWORK_ID) {
+export const getNetworkMulticall = networkId => {
+  switch (networkId) {
     case '56':
       return '0xB94858b0bB5437498F5453A16039337e5Fdc269C';
     case '128':
