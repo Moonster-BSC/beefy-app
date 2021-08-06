@@ -67,7 +67,7 @@ const PoolDetails = ({ vaultId }) => {
       if (address && web3) {
         fetchBalances({ address, web3, tokens });
       }
-      fetchVaultsData({ web3, pools, currentNetwork });
+      fetchVaultsData({ web3, currentNetwork });
       fetchApys();
     };
     fetch();

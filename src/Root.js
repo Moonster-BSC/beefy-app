@@ -6,7 +6,6 @@ import { hot, setConfig } from 'react-hot-loader';
 import store from './common/store';
 import routeConfig from './common/routeConfig';
 import history from './common/history';
-import { initializePriceCache } from './features/web3/fetchPrice';
 import { Helmet } from 'react-helmet';
 import { usePageMeta } from './features/common/getPageMeta';
 
@@ -54,8 +53,6 @@ function renderRouteConfigV3(routes, contextPath) {
 function Root() {
   const children = renderRouteConfigV3(routeConfig, '/');
   const { getPageMeta } = usePageMeta();
-
-  initializePriceCache();
 
   return (
     <Provider store={store}>

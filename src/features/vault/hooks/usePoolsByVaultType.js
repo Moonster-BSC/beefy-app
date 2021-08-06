@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
-import { stables } from '../components/Filters/constants.js';
 import useFilterStorage from '../../home/hooks/useFiltersStorage';
+import useNetworkIdStorage from 'features/home/hooks/useNetworkIdStorage.js';
+import { getNetworkStables } from '../../helpers/getNetworkData';
 
 const DEFAULT = 'All';
 const KEY = 'poolsByVaultType';
 
 const usePoolsByVaultType = pools => {
   const { getStorage, setStorage } = useFilterStorage();
+  const networkStorage = useNetworkIdStorage();
+  const networkId = networkStorage.getStorage();
   const data = getStorage(KEY);
+  const stables = getNetworkStables(networkId);
 
   const [vaultType, setVaultType] = useState(data ? data : DEFAULT);
 

@@ -14,7 +14,7 @@ const useStyles = makeStyles(styles);
 
 const NetworksModal = () => {
   const classes = useStyles();
-  const { isModalOpen, closeModal, networks, currentNetwork } = useNetworks();
+  const { isModalOpen, closeModal, networks, currentNetwork, setCurrentNetwork } = useNetworks();
   const { t } = useTranslation();
   const theme = useTheme();
 
@@ -26,7 +26,7 @@ const NetworksModal = () => {
     if (network.id === currentNetwork.id) {
       closeModal();
     } else {
-      window.open(network.url, '_self');
+      setCurrentNetwork(network.id);
     }
   };
 

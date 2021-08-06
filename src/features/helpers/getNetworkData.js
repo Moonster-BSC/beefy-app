@@ -26,6 +26,8 @@ import {
   polygonZaps,
 } from '../configure';
 
+import { getEligibleZap } from 'features/zap/zapUniswapV2';
+
 const networkTxUrls = {
   56: hash => `https://bscscan.com/tx/${hash}`,
   128: hash => `https://hecoinfo.com/tx/${hash}`,
@@ -62,21 +64,37 @@ export const getNetworkCoin = networkId => {
   return nativeCoins.find(coin => coin.chainId === networkId);
 };
 
-export const getNetworkPools = () => {
-  switch (process.env.REACT_APP_NETWORK_ID) {
+export const getNetworkPools = networkId => {
+  let pools = [];
+  switch (networkId) {
     case '56':
-      return bscPools;
+      pools = bscPools;
+      break;
     case '128':
-      return hecoPools;
+      pools = hecoPools;
+      break;
     case '43114':
-      return avalanchePools;
+      pools = avalanchePools;
+      break;
     case '137':
-      return polygonPools;
+      pools = polygonPools;
+      break;
     case '250':
-      return fantomPools;
+      pools = fantomPools;
+      break;
     default:
-      return [];
+      pools = [];
+      break;
   }
+
+  // fill in missing data, like used to happen in init state
+
+  const updatedPools = pools.forEach(pool => {
+    if (!pool.withdrawalFee) pool.withdrawalFee = '0.1%';
+    if (!pool.depositFee) pool.depositFee = '0%';
+
+    const zap = getEligibleZap(pool, networkId);
+  });
 };
 
 export const getNetworkVaults = networkId => {
@@ -113,8 +131,8 @@ export const getNetworkLaunchpools = networkId => {
   }
 };
 
-export const getNetworkTokens = () => {
-  switch (process.env.REACT_APP_NETWORK_ID) {
+export const getNetworkTokens = networkId => {
+  switch (networkId) {
     case '56':
       return bscAddressBook.tokens;
     case '128':
@@ -132,8 +150,8 @@ export const getNetworkTokens = () => {
   }
 };
 
-export const getNetworkBurnTokens = () => {
-  switch (process.env.REACT_APP_NETWORK_ID) {
+export const getNetworkBurnTokens = networkId => {
+  switch (networkId) {
     case '56':
       return {
         [bscAddressBook.tokens.GARUDA.symbol]: bscAddressBook.tokens.GARUDA,
@@ -155,8 +173,8 @@ export const getNetworkBurnTokens = () => {
   }
 };
 
-export const getNetworkZaps = () => {
-  switch (process.env.REACT_APP_NETWORK_ID) {
+export const getNetworkZaps = networkId => {
+  switch (networkId) {
     case '56':
       return bscZaps;
     case '128':
@@ -172,8 +190,8 @@ export const getNetworkZaps = () => {
   }
 };
 
-export const getNetworkStables = () => {
-  switch (process.env.REACT_APP_NETWORK_ID) {
+export const getNetworkStables = networkId => {
+  switch (networkId) {
     case '56':
       return [
         'BUSD',

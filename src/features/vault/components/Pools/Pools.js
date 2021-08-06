@@ -51,7 +51,7 @@ export default function Pools() {
         fetchBalances({ address, web3, tokens });
       }
       if (!fetchVaultsDataPending) {
-        fetchVaultsData({ web3, pools, currentNetwork });
+        fetchVaultsData({ web3, currentNetwork });
       }
     };
     fetch();

@@ -1,8 +1,8 @@
-import { getNetworkPools, getNetworkStables } from '../../../helpers/getNetworkData';
+import { getNetworkPools } from '../../../helpers/getNetworkData';
 
-const unique = key => [
+const unique = (networkId, key) => [
   ...new Set(
-    getNetworkPools()
+    getNetworkPools(networkId)
       .map(pool => pool[key])
       .flat()
       .filter(data => data !== undefined)
@@ -10,6 +10,5 @@ const unique = key => [
   ),
 ];
 
-export const assets = unique('assets');
-export const platforms = unique('platform');
-export const stables = getNetworkStables();
+export const getUniqueAssets = networkId => unique(networkId, 'assets');
+export const getUniquePlatforms = networkId => unique(networkId, 'platform');

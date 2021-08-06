@@ -11,9 +11,10 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 import { Avatar, Box, Button } from '@material-ui/core';
+import { useNetworks } from 'components/NetworksProvider/NetworksProvider';
 
 import styles from './styles';
-import { assets, platforms } from './constants';
+import { getUniquePlatforms, getUniqueAssets } from './constants';
 
 const useStyles = makeStyles(styles);
 
@@ -31,6 +32,7 @@ const Filters = ({
 }) => {
   const { t } = useTranslation();
   const classes = useStyles();
+  const { currentNetwork } = useNetworks();
 
   const handlePlatformChange = useCallback(event => setPlatform(event.target.value), [setPlatform]);
   const handleVaultTypeChange = useCallback(
@@ -39,6 +41,10 @@ const Filters = ({
   );
   const handleAssetChange = useCallback((_event, option) => setAsset(option.value), [setAsset]);
   const handleOrderChange = useCallback(event => setOrder(event.target.value), [setOrder]);
+
+  const networkId = currentNetwork.id;
+  const assets = getUniqueAssets(networkId);
+  const platforms = getUniquePlatforms(networkId);
 
   const allAssetOptions = useMemo(() => {
     return [
@@ -51,7 +57,7 @@ const Filters = ({
         label: asset,
       })),
     ];
-  }, [t]);
+  }, [assets, t]);
 
   const resetFilter = useCallback(() => {
     toggleFilter('resetAll');

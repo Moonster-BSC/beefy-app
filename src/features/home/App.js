@@ -15,6 +15,7 @@ import { createWeb3Modal } from '../web3';
 import { useConnectWallet, useDisconnectWallet } from './redux/hooks';
 import useNightMode from './hooks/useNightMode';
 import createTheme from './jss/appTheme';
+import { initializePriceCache } from '../web3/fetchPrice';
 
 const themes = { light: null, dark: null };
 const getTheme = mode => {
@@ -51,6 +52,8 @@ export default function App({ children }) {
   const disconnectWalletCallback = useCallback(() => {
     disconnectWallet(web3, web3Modal);
   }, [web3, web3Modal, disconnectWallet]);
+
+  initializePriceCache(networkId);
 
   return (
     <StylesProvider injectFirst>

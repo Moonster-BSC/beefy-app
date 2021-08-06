@@ -7,12 +7,12 @@ import {
   getNetworkCoin,
 } from 'features/helpers/getNetworkData';
 
-const availableZaps = getNetworkZaps();
-const availableTokens = getNetworkTokens();
-const burnTokens = getNetworkBurnTokens();
-const nativeCoin = getNetworkCoin();
+export const getEligibleZap = (pool, networkId) => {
+  const availableZaps = getNetworkZaps(networkId);
+  const availableTokens = getNetworkTokens(networkId);
+  const burnTokens = getNetworkBurnTokens(networkId);
+  const nativeCoin = getNetworkCoin(networkId);
 
-export const getEligibleZap = pool => {
   if (pool.assets.length !== 2) return undefined;
 
   const eligibleNativeCoin = [];
