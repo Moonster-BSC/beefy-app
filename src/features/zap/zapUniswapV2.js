@@ -1,15 +1,13 @@
 import { pack, keccak256 } from '@ethersproject/solidity';
 import { getCreate2Address } from '@ethersproject/address';
 import {
-  getNetworkTokens,
   getNetworkBurnTokens,
   getNetworkZaps,
   getNetworkCoin,
 } from 'features/helpers/getNetworkData';
 
-export const getEligibleZap = (pool, networkId) => {
+export const getEligibleZap = (pool, networkId, availableTokens) => {
   const availableZaps = getNetworkZaps(networkId);
-  const availableTokens = getNetworkTokens(networkId);
   const burnTokens = getNetworkBurnTokens(networkId);
   const nativeCoin = getNetworkCoin(networkId);
 

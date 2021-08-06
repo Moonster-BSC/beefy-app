@@ -135,7 +135,7 @@ export const getNetworkLaunchpools = networkId => {
   }
 };
 
-export const getNetworkTokens = networkId => {
+export const getNetworkAddressBookTokens = networkId => {
   let tokens = {};
   switch (networkId) {
     case 56:
@@ -158,10 +158,15 @@ export const getNetworkTokens = networkId => {
         `Create address book for this chainId first. Check out https://github.com/beefyfinance/address-book`
       );
   }
+  return tokens;
+};
+
+export const getNetworkTokens = networkId => {
+  let tokens = getNetworkAddressBookTokens(networkId);
 
   // fill in rest of info from state
 
-  const pools = getNetworkTokens(networkId);
+  const pools = getNetworkPools(networkId);
   pools.forEach(
     (
       {
@@ -180,7 +185,7 @@ export const getNetworkTokens = networkId => {
       // if (!depositFee) pools[i].depositFee = '0%';
 
       tokens[token] = {
-        symbol: token,
+        ...tokens[token],
         decimals: tokenDecimals,
         tokenAddress: tokenAddress,
         tokenBalance: 0,
@@ -190,7 +195,7 @@ export const getNetworkTokens = networkId => {
         },
       };
       tokens[earnedToken] = {
-        symbol: earnedToken,
+        ...tokens[earnedToken],
         decimals: 18,
         tokenAddress: earnedTokenAddress,
         tokenBalance: 0,
@@ -199,7 +204,7 @@ export const getNetworkTokens = networkId => {
         },
       };
 
-      const zap = getEligibleZap(pools[i], networkId);
+      const zap = getEligibleZap(pools[i], networkId, tokens);
       if (zap) {
         tokens[token].allowance[zap.zapAddress] = tokenAddress ? 0 : Infinity;
         tokens[earnedToken].allowance[zap.zapAddress] = 0;
