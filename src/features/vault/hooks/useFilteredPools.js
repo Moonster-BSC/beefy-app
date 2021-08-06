@@ -3,6 +3,7 @@ import useFilterStorage from '../../home/hooks/useFiltersStorage';
 import { shallowEqual, useSelector } from 'react-redux';
 import { useLaunchpoolSubscriptions } from '../../stake/redux/subscription';
 import { launchpools } from '../../helpers/getNetworkData';
+import BigNumber from 'bignumber.js';
 
 const DEFAULT = {
   hideDecomissioned: true,
@@ -104,27 +105,40 @@ function showBoosted(pools, vaultLaunchpools) {
   });
 }
 
+const getEarnedTokenBalance = (pool, tokens) => {
+  let tokenBalance = new BigNumber(0);
+  if (tokens[pool.earnedToken] && tokens[pool.earnedToken].tokenBalance) {
+    tokenBalance = new BigNumber(tokens[pool.earnedToken].tokenBalance);
+  }
+  return tokenBalance;
+};
+
+const getTokenBalance = (pool, tokens) => {
+  let tokenBalance = new BigNumber(0);
+  if (tokens[pool.token] && tokens[pool.token].tokenBalance) {
+    tokenBalance = new BigNumber(tokens[pool.token].tokenBalance);
+  }
+  return tokenBalance;
+};
+
 function hideDecomissioned(pools, tokens) {
   return pools.filter(pool => {
-    return (
-      (pool.status !== 'eol' && pool.status !== 'refund') ||
-      (tokens[pool.earnedToken] && tokens[pool.earnedToken].tokenBalance > 0)
-    );
+    const earnedTokenBalance = getEarnedTokenBalance(pool, tokens);
+    return (pool.status !== 'eol' && pool.status !== 'refund') || earnedTokenBalance > 0;
   });
 }
 
 function hideZeroBalances(pools, tokens, recentStakedLaunchpools) {
   return pools.filter(pool => {
-    if (tokens[pool.token]) {
-      if (tokens[pool.token].tokenBalance > 0) {
-        return true;
-      }
+    const tokenBalance = getTokenBalance(pool, tokens);
+    if (tokenBalance > 0) {
+      return true;
     }
 
-    if (tokens[pool.earnedToken]) {
-      if (tokens[pool.earnedToken].tokenBalance > 0) {
-        return true;
-      }
+    const earnedTokenBalance = getEarnedTokenBalance(pool, tokens);
+
+    if (earnedTokenBalance > 0) {
+      return true;
     }
 
     const launchpools = getLaunchpoolsForVault(pool, recentStakedLaunchpools);
