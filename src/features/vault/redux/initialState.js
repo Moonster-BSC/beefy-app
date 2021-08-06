@@ -47,16 +47,16 @@ pools.forEach(
     if (zap) {
       tokens[token].allowance[zap.zapAddress] = tokenAddress ? 0 : Infinity;
       tokens[earnedToken].allowance[zap.zapAddress] = 0;
-      pools[i]['zap'] = zap;
-      zapMap[pools[i].id] = zap;
+      pools[i]['zap'] = zap; // TODO move this to redux, since pools will move to redux as well
+      zapMap[pools[i].id] = zap; // only for console
     }
   }
 );
 
 const now = Date.now() / 1000;
 const initialState = {
-  pools,
-  tokens,
+  pools: [], // TODO: redux to update this
+  tokens: [], // TODO: redux to update this
   apys: {},
   bifibuyback: {},
   fetchApysDone: false,
