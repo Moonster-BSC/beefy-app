@@ -9,7 +9,7 @@ import { MultiCall } from 'eth-multicall';
 import { erc20ABI, multicallABI, uniswapV2PairABI } from 'features/configure';
 import { byDecimals } from 'features/helpers/bignumber';
 import { getNetworkMulticall } from 'features/helpers/getNetworkData';
-import { getNetworkTokens } from 'features/helpers/getNetworkData';
+import { getNetworkPoolsAndTokens } from 'features/helpers/getNetworkData';
 import BigNumber from 'bignumber.js';
 
 export function fetchBalances({ address, web3, currentNetwork }) {
@@ -22,7 +22,7 @@ export function fetchBalances({ address, web3, currentNetwork }) {
 
     const networkId = currentNetwork.id;
 
-    const tokens = getNetworkTokens(networkId);
+    const { tokens } = getNetworkPoolsAndTokens(networkId);
 
     const promise = new Promise((resolve, reject) => {
       const multicall = new MultiCall(web3, getNetworkMulticall(networkId));

@@ -15,6 +15,7 @@ import { useConnectWallet, useDisconnectWallet } from './redux/hooks';
 import useNightMode from './hooks/useNightMode';
 import createTheme from './jss/appTheme';
 import { initializePriceCache } from '../web3/fetchPrice';
+import { useNetworks } from './hooks/useNetworks.js';
 
 const themes = { light: null, dark: null };
 const getTheme = mode => {
@@ -23,8 +24,10 @@ const getTheme = mode => {
 
 export default function App({ children }) {
   const { t } = useTranslation();
-  const { connectWallet, web3, address, networkId, connected } = useConnectWallet();
+  const { connectWallet, web3, address, networkId: _networkId, connected } = useConnectWallet();
   const { disconnectWallet } = useDisconnectWallet();
+  const { currentNetwork } = useNetworks();
+  const networkId = currentNetwork.id;
 
   const [web3Modal, setModal] = useState(null);
 

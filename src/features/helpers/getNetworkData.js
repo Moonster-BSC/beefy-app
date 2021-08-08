@@ -64,7 +64,7 @@ export const getNetworkCoin = networkId => {
   return nativeCoins.find(coin => coin.chainId === networkId);
 };
 
-export const getNetworkPools = networkId => {
+export const getNetworkPoolsAndTokens = networkId => {
   let pools = [];
   switch (networkId) {
     case 56:
@@ -89,16 +89,57 @@ export const getNetworkPools = networkId => {
 
   // fill in missing data, like used to happen in init state
 
-  const updatedPools = pools.map(pool => {
-    if (!pool.withdrawalFee) pool.withdrawalFee = '0.1%';
-    if (!pool.depositFee) pool.depositFee = '0%';
+  let tokens = getNetworkAddressBookTokens(networkId);
 
-    const zap = getEligibleZap(pool, networkId);
-    pool['zap'] = zap;
-    return pool;
-  });
+  // fill in rest of info from state
 
-  return updatedPools;
+  pools.forEach(
+    (
+      {
+        token,
+        tokenDecimals,
+        tokenAddress,
+        earnedToken,
+        earnContractAddress,
+        earnedTokenAddress,
+        withdrawalFee,
+        depositFee,
+      },
+      i
+    ) => {
+      if (!withdrawalFee) pools[i].withdrawalFee = '0.1%';
+      if (!depositFee) pools[i].depositFee = '0%';
+
+      tokens[token] = {
+        ...tokens[token],
+        decimals: tokenDecimals,
+        tokenAddress: tokenAddress,
+        tokenBalance: 0,
+        allowance: {
+          ...tokens[token]?.allowance,
+          [earnContractAddress]: tokenAddress ? 0 : Infinity,
+        },
+      };
+      tokens[earnedToken] = {
+        ...tokens[earnedToken],
+        decimals: 18,
+        tokenAddress: earnedTokenAddress,
+        tokenBalance: 0,
+        allowance: {
+          [earnContractAddress]: 0,
+        },
+      };
+
+      const zap = getEligibleZap(pools[i], networkId, tokens);
+      if (zap) {
+        tokens[token].allowance[zap.zapAddress] = tokenAddress ? 0 : Infinity;
+        tokens[earnedToken].allowance[zap.zapAddress] = 0;
+        pools[i]['zap'] = zap;
+      }
+    }
+  );
+
+  return { pools, tokens };
 };
 
 export const getNetworkVaults = networkId => {
@@ -158,61 +199,6 @@ export const getNetworkAddressBookTokens = networkId => {
         `Create address book for this chainId first. Check out https://github.com/beefyfinance/address-book`
       );
   }
-  return tokens;
-};
-
-export const getNetworkTokens = networkId => {
-  let tokens = getNetworkAddressBookTokens(networkId);
-
-  // fill in rest of info from state
-
-  const pools = getNetworkPools(networkId);
-  pools.forEach(
-    (
-      {
-        token,
-        tokenDecimals,
-        tokenAddress,
-        earnedToken,
-        earnContractAddress,
-        earnedTokenAddress,
-        withdrawalFee,
-        depositFee,
-      },
-      i
-    ) => {
-      // if (!withdrawalFee) pools[i].withdrawalFee = '0.1%';
-      // if (!depositFee) pools[i].depositFee = '0%';
-
-      tokens[token] = {
-        ...tokens[token],
-        decimals: tokenDecimals,
-        tokenAddress: tokenAddress,
-        tokenBalance: 0,
-        allowance: {
-          ...tokens[token]?.allowance,
-          [earnContractAddress]: tokenAddress ? 0 : Infinity,
-        },
-      };
-      tokens[earnedToken] = {
-        ...tokens[earnedToken],
-        decimals: 18,
-        tokenAddress: earnedTokenAddress,
-        tokenBalance: 0,
-        allowance: {
-          [earnContractAddress]: 0,
-        },
-      };
-
-      const zap = getEligibleZap(pools[i], networkId, tokens);
-      if (zap) {
-        tokens[token].allowance[zap.zapAddress] = tokenAddress ? 0 : Infinity;
-        tokens[earnedToken].allowance[zap.zapAddress] = 0;
-        // pools[i]['zap'] = zap;
-      }
-    }
-  );
-
   return tokens;
 };
 

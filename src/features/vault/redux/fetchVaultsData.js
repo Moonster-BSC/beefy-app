@@ -13,7 +13,7 @@ import { byDecimals } from 'features/helpers/bignumber';
 import { getNetworkMulticall } from 'features/helpers/getNetworkData';
 import Web3 from 'web3';
 import { getRpcUrl } from 'common/networkSetup';
-import { getNetworkPools } from 'features/helpers/getNetworkData';
+import { getNetworkPoolsAndTokens } from 'features/helpers/getNetworkData';
 
 export function fetchVaultsData({ web3, currentNetwork }) {
   return dispatch => {
@@ -23,7 +23,7 @@ export function fetchVaultsData({ web3, currentNetwork }) {
 
     const networkId = currentNetwork.id;
 
-    const pools = getNetworkPools(networkId);
+    const { pools } = getNetworkPoolsAndTokens(networkId);
 
     if (!web3) {
       // setup default provider to get vault data

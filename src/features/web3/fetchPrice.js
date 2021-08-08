@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import { getNetworkPools, launchpools } from '../helpers/getNetworkData';
+import { getNetworkPoolsAndTokens, launchpools } from '../helpers/getNetworkData';
 import { getApiCacheBuster } from './getApiCacheBuster';
 
 const CACHE_TIMEOUT_MS = 1 * 60 * 1000; // 1 minute(s)
@@ -67,7 +67,7 @@ export function initializePriceCache(networkId) {
   priceCache.lastUpdated = currentTimestamp;
 
   const oracleToIds = new Map();
-  const pools = getNetworkPools(networkId);
+  const { pools } = getNetworkPoolsAndTokens(networkId);
   pools.forEach(pool => {
     if (!oracleToIds.has(pool.oracle)) {
       oracleToIds.set(pool.oracle, []);

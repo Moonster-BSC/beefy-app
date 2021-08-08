@@ -31,7 +31,7 @@ export const getEligibleZap = (pool, networkId, availableTokens) => {
     tokenBSymbol = tokenSymbols[1];
     tokenA = availableTokens[tokenASymbol];
     tokenB = availableTokens[tokenBSymbol];
-    if (tokenA && tokenB) {
+    if (tokenA && tokenB && tokenA.address && tokenB.address) {
       return (
         pool.tokenAddress ===
         computePairAddress(zap.ammFactory, zap.ammPairInitHash, tokenA.address, tokenB.address)
