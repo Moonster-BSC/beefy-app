@@ -26,6 +26,114 @@ export const polygonPools = [
       'https://quickswap.exchange/#/swap?inputCurrency=0x7ceB23fD6bC0adD59E62ac25578270cFf1b9f619&outputCurrency=0xfbdd194376de19a88118e84e279b977f165d01b8',
   },
   {
+    id: 'dinoswap-dfyn-route-eth',
+    name: 'ROUTE-ETH LP',
+    token: 'ROUTE-ETH LP',
+    tokenDescription: 'DFyn (DinoSwap)',
+    tokenAddress: '0xeBC4f9B1cE66258AC3A48578FFEEba1330dDB68B',
+    tokenDecimals: 18,
+    tokenDescriptionUrl: '#',
+    earnedToken: 'mooDinoSwapDfynROUTE-ETH',
+    earnedTokenAddress: '0x655AF65e1f26ccB1dD18EF1DA93E813911818c5e',
+    earnContractAddress: '0x655AF65e1f26ccB1dD18EF1DA93E813911818c5e',
+    pricePerFullShare: 1,
+    tvl: 0,
+    oracle: 'lps',
+    oracleId: 'dinoswap-dfyn-route-eth',
+    oraclePrice: 0,
+    depositsPaused: false,
+    status: 'active',
+    platform: 'DinoSwap',
+    assets: ['ROUTE', 'ETH'],
+    callFee: 0.5,
+    addLiquidityUrl:
+      'https://exchange.dfyn.network/#/add/0x7ceb23fd6bc0add59e62ac25578270cff1b9f619/0xeBC4f9B1cE66258AC3A48578FFEEba1330dDB68B',
+    buyTokenUrl:
+      'https://exchange.dfyn.network/#/swap?inputCurrency=0x7ceb23fd6bc0add59e62ac25578270cff1b9f619&outputCurrency=0xeBC4f9B1cE66258AC3A48578FFEEba1330dDB68B',
+  },
+  {
+    id: 'quick-usdc-quick',
+    name: 'QUICK-USDC LP',
+    token: 'QUICK-USDC LP',
+    tokenDescription: 'Quickswap',
+    tokenAddress: '0x1F1E4c845183EF6d50E9609F16f6f9cAE43BC9Cb',
+    tokenDecimals: 18,
+    tokenDescriptionUrl: '#',
+    earnedToken: 'mooQuickQUICK-USDC',
+    earnedTokenAddress: '0xeD7148949c2dC8AA59A5aD8658eF347Bd7387fA8',
+    earnContractAddress: '0xeD7148949c2dC8AA59A5aD8658eF347Bd7387fA8',
+    pricePerFullShare: 1,
+    tvl: 0,
+    oracle: 'lps',
+    oracleId: 'quick-usdc-quick',
+    oraclePrice: 0,
+    depositsPaused: false,
+    status: 'active',
+    platform: 'QuickSwap',
+    assets: ['QUICK', 'USDC'],
+    callFee: 0.5,
+    withdrawalFee: '0%',
+    addLiquidityUrl:
+      'https://quickswap.exchange/#/add/0x2791bca1f2de4661ed88a30c99a7a9449aa84174/0x831753dd7087cac61ab5644b308642cc1c33dc13',
+    buyTokenUrl:
+      'https://quickswap.exchange/#/swap?inputCurrency=0x2791bca1f2de4661ed88a30c99a7a9449aa84174&outputCurrency=0x831753dd7087cac61ab5644b308642cc1c33dc13',
+  },
+  {
+    id: 'quick-wmatic-avax',
+    name: 'AVAX-MATIC LP',
+    token: 'AVAX-MATIC LP',
+    tokenDescription: 'Quickswap',
+    tokenAddress: '0xEb477AE74774b697B5D515eF8ca09e24FEe413b5',
+    tokenDecimals: 18,
+    tokenDescriptionUrl: '#',
+    earnedToken: 'mooQuickAVAX-WMATIC',
+    earnedTokenAddress: '0x764B2aAcfDE7e33888566a6d44005Dc982F02031',
+    earnContractAddress: '0x764B2aAcfDE7e33888566a6d44005Dc982F02031',
+    pricePerFullShare: 1,
+    tvl: 0,
+    oracle: 'lps',
+    oracleId: 'quick-wmatic-avax',
+    oraclePrice: 0,
+    depositsPaused: false,
+    status: 'active',
+    platform: 'QuickSwap',
+    assets: ['AVAX', 'MATIC'],
+    callFee: 0.5,
+    withdrawalFee: '0%',
+    addLiquidityUrl:
+      'https://quickswap.exchange/#/add/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270/0x2c89bbc92bd86f8075d1decc58c7f4e0107f286b',
+    buyTokenUrl:
+      'https://quickswap.exchange/#/swap?inputCurrency=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270&outputCurrency=0x2c89bbc92bd86f8075d1decc58c7f4e0107f286b',
+  },
+  {
+    id: 'quick-wmatic-ht',
+    name: 'HT-MATIC LP',
+    token: 'HT-MATIC LP',
+    tokenDescription: 'Quickswap',
+    tokenAddress: '0x20e28214946B4e0F18B2c1aA7C976dF087695a5d',
+    tokenDecimals: 18,
+    tokenDescriptionUrl: '#',
+    earnedToken: 'mooQuickHT-WMATIC',
+    earnedTokenAddress: '0x69df355fD685d87b44e86728f3A0b92D01341E40',
+    earnContractAddress: '0x69df355fD685d87b44e86728f3A0b92D01341E40',
+    pricePerFullShare: 1,
+    tvl: 0,
+    oracle: 'lps',
+    oracleId: 'quick-wmatic-ht',
+    oraclePrice: 0,
+    depositsPaused: false,
+    status: 'active',
+    platform: 'QuickSwap',
+    assets: ['HT', 'MATIC'],
+    callFee: 0.5,
+    withdrawalFee: '0%',
+    addLiquidityUrl:
+      'https://quickswap.exchange/#/add/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270/0xa731349fa468614c1698fc46ebf06da6f380239e',
+    buyTokenUrl:
+      'https://quickswap.exchange/#/swap?inputCurrency=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270&outputCurrency=0xa731349fa468614c1698fc46ebf06da6f380239e',
+
+  },
+  {
     id: 'pearzap-pear-usdc',
     name: 'PEAR-USDC LP',
     token: 'PEAR-USDC LP',
@@ -857,7 +965,7 @@ export const polygonPools = [
       'https://app.sushi.com/swap?inputCurrency=0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174&outputCurrency=0xAa9654BECca45B5BDFA5ac646c939C62b527D394',
   },
   {
-    id: 'dinoswap-usdc-mimatic',
+    id: 'dinoswap-usdc-mimatic-eol',
     name: 'MAI-USDC LP',
     token: 'MAI-USDC QLP',
     tokenDescription: 'Quickswap (DinoSwap)',
@@ -872,19 +980,20 @@ export const polygonPools = [
     oracle: 'lps',
     oracleId: 'dinoswap-usdc-mimatic',
     oraclePrice: 0,
-    depositsPaused: false,
-    status: 'active',
+    depositsPaused: true,
+    status: 'eol',
     platform: 'DinoSwap',
     assets: ['MAI', 'USDC'],
     callFee: 0.5,
     withdrawalFee: '0.01%',
+    retireReason: 'rewards',
     addLiquidityUrl:
       'https://quickswap.exchange/#/add/0x2791bca1f2de4661ed88a30c99a7a9449aa84174/0xa3Fa99A148fA48D14Ed51d610c367C61876997F1',
     buyTokenUrl:
       'https://quickswap.exchange/#/swap?outputCurrency=0xa3Fa99A148fA48D14Ed51d610c367C61876997F1',
   },
   {
-    id: 'dinoswap-usdc-usdt',
+    id: 'dinoswap-usdc-usdt-eol',
     name: 'USDC-USDT LP',
     token: 'USDC-USDT QLP',
     tokenDescription: 'Quickswap (DinoSwap)',
@@ -899,12 +1008,13 @@ export const polygonPools = [
     oracle: 'lps',
     oracleId: 'dinoswap-usdc-usdt',
     oraclePrice: 0,
-    depositsPaused: false,
-    status: 'active',
+    depositsPaused: true,
+    status: 'eol',
     platform: 'DinoSwap',
     assets: ['USDC', 'USDT'],
     callFee: 0.5,
     withdrawalFee: '0.01%',
+    retireReason: 'rewards',
     addLiquidityUrl:
       'https://quickswap.exchange/#/add/0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174/0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
   },
@@ -1602,6 +1712,7 @@ export const polygonPools = [
     platform: 'QuickSwap',
     assets: ['MAI', 'USDC'],
     callFee: 0.5,
+    withdrawalFee: '0.01%',
     addLiquidityUrl:
       'https://quickswap.exchange/#/add/0x2791bca1f2de4661ed88a30c99a7a9449aa84174/0xa3Fa99A148fA48D14Ed51d610c367C61876997F1',
     buyTokenUrl:
@@ -1815,7 +1926,7 @@ export const polygonPools = [
       'https://exchange.dfyn.network/#/swap?inputCurrency=0x16ECCfDbb4eE1A85A33f3A9B21175Cd7Ae753dB4&outputCurrency=0xC168E40227E4ebD8C1caE80F7a55a4F0e6D66C97',
   },
   {
-    id: 'dfyn-sx-dfyn',
+    id: 'dfyn-sx-dfyn-eol',
     name: 'SX-DFYN LP',
     token: 'SX-DFYN DLP',
     tokenDescription: 'DFyn',
@@ -1830,8 +1941,9 @@ export const polygonPools = [
     oracle: 'lps',
     oracleId: 'dfyn-sx-dfyn',
     oraclePrice: 0,
-    depositsPaused: false,
-    status: 'active',
+    depositsPaused: true,
+    status: 'eol',
+    retireReason: 'rewards',
     platform: 'DFyn',
     assets: ['SX', 'DFYN'],
     callFee: 0.05,
@@ -2172,6 +2284,7 @@ export const polygonPools = [
     platform: 'QuickSwap',
     assets: ['rUSD', 'USDC'],
     callFee: 0.5,
+    withdrawalFee: '0.01%',
     addLiquidityUrl:
       'https://quickswap.exchange/#/add/0xfC40a4F89b410a1b855b5e205064a38fC29F5eb5/0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
     buyTokenUrl:
@@ -2484,6 +2597,7 @@ export const polygonPools = [
     platform: 'QuickSwap',
     assets: ['DAI', 'USDT'],
     callFee: 0.5,
+    withdrawalFee: '0.01%',
     addLiquidityUrl:
       'https://quickswap.exchange/#/add/0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063/0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
     buyTokenUrl:
@@ -2728,6 +2842,7 @@ export const polygonPools = [
     status: 'active',
     platform: 'WaultFinance',
     assets: ['DAI', 'USDC'],
+    withdrawalFee: '0.01%',
     callFee: 0.05,
     addLiquidityUrl:
       'https://swap.wault.finance/polygon/#/add/0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174/0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
@@ -2779,6 +2894,7 @@ export const polygonPools = [
     platform: 'WaultFinance',
     assets: ['USDT', 'USDC'],
     callFee: 0.05,
+    withdrawalFee: '0.01%',
     addLiquidityUrl:
       'https://swap.wault.finance/polygon/#/add/0x2791bca1f2de4661ed88a30c99a7a9449aa84174/0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
   },
@@ -2937,6 +3053,7 @@ export const polygonPools = [
     platform: 'QuickSwap',
     assets: ['USDC', 'DAI'],
     callFee: 0.5,
+    withdrawalFee: '0.01%',
     addLiquidityUrl:
       'https://quickswap.exchange/#/add/0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174/0x8f3Cf7ad23Cd3CaDbD9735AFf958023239c6A063',
     buyTokenUrl:
@@ -3312,6 +3429,7 @@ export const polygonPools = [
     platform: 'SushiSwap',
     assets: ['FRAX', 'FXS'],
     callFee: 0.5,
+    withdrawalFee: '0.01%',
     addLiquidityUrl:
       'https://app.sushi.com/add/0x104592a158490a9228070E0A8e5343B499e125D0/0x3e121107F6F22DA4911079845a470757aF4e1A1b',
     buyTokenUrl:
@@ -3393,6 +3511,7 @@ export const polygonPools = [
     platform: 'SushiSwap',
     assets: ['USDC', 'DAI'],
     callFee: 0.5,
+    withdrawalFee: '0.01%',
     addLiquidityUrl:
       'https://app.sushi.com/add/0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174/0x8f3cf7ad23cd3cadbd9735aff958023239c6a063',
     buyTokenUrl:
@@ -4136,6 +4255,7 @@ export const polygonPools = [
     platform: 'SushiSwap',
     assets: ['USDC', 'USDT'],
     callFee: 0.5,
+    withdrawalFee: '0.01%',
     addLiquidityUrl:
       'https://app.sushi.com/#/add/0x2791bca1f2de4661ed88a30c99a7a9449aa84174/0xc2132D05D31c914a87C6611C10748AEb04B58e8F',
     buyTokenUrl:
