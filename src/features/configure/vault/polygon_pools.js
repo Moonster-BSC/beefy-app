@@ -98,6 +98,7 @@ export const polygonPools = [
     platform: 'Polypup',
     assets: ['BALL', 'MATIC'],
     callFee: 0.5,
+    withdrawalFee: '0.0%',
     addLiquidityUrl:
       'https://quickswap.exchange/#/add/0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270/0x883aBe4168705d2e5dA925d28538B7a6AA9d8419',
     buyTokenUrl:
