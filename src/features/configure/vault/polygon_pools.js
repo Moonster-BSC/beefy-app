@@ -131,7 +131,6 @@ export const polygonPools = [
       'https://quickswap.exchange/#/add/0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270/0xa731349fa468614c1698fc46ebf06da6f380239e',
     buyTokenUrl:
       'https://quickswap.exchange/#/swap?inputCurrency=0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270&outputCurrency=0xa731349fa468614c1698fc46ebf06da6f380239e',
-
   },
   {
     id: 'pearzap-pear-usdc',
@@ -1771,7 +1770,7 @@ export const polygonPools = [
       'https://quickswap.exchange/#/swap?outputCurrency=0x4C16f69302CcB511c5Fac682c7626B9eF0Dc126a',
   },
   {
-    id: 'boneswap-quick-wmatic-bone',
+    id: 'boneswap-quick-wmatic-bone-eol',
     name: 'BONE-MATIC LP',
     token: 'BONE-MATIC LP',
     tokenDescription: 'Quickswap (BoneSwap)',
@@ -1786,18 +1785,19 @@ export const polygonPools = [
     oracle: 'lps',
     oracleId: 'boneswap-quick-wmatic-bone',
     oraclePrice: 0,
-    depositsPaused: false,
-    status: 'active',
+    depositsPaused: true,
+    status: 'eol',
     platform: 'BoneSwap',
     assets: ['BONEswap', 'MATIC'],
     callFee: 0.5,
+    retireReason: 'rewards',
     addLiquidityUrl:
       'https://quickswap.exchange/#/add/0x80244C2441779361F35803b8C711C6c8fC6054a3/0x0d500B1d8E8eF31E21C99d1Db9A6444d3ADf1270',
     buyTokenUrl:
       'https://quickswap.exchange/#/swap?outputCurrency=0x80244C2441779361F35803b8C711C6c8fC6054a3',
   },
   {
-    id: 'boneswap-sushi-wmatic-bone',
+    id: 'boneswap-sushi-wmatic-bone-eol',
     name: 'BONE-MATIC SLP',
     token: 'BONE-MATIC SLP',
     tokenDescription: 'SushiSwap (BoneSwap)',
@@ -1812,17 +1812,18 @@ export const polygonPools = [
     oracle: 'lps',
     oracleId: 'boneswap-sushi-wmatic-bone',
     oraclePrice: 0,
-    depositsPaused: false,
-    status: 'active',
+    depositsPaused: true,
+    status: 'eol',
     platform: 'BoneSwap',
     assets: ['BONEswap', 'MATIC'],
     callFee: 0.5,
+    retireReason: 'rewards',
     addLiquidityUrl: 'https://app.sushi.com/add/ETH/0x80244C2441779361F35803b8C711C6c8fC6054a3',
     buyTokenUrl:
       'https://app.sushi.com/swap?inputCurrency=ETH&outputCurrency=0x80244C2441779361F35803b8C711C6c8fC6054a3',
   },
   {
-    id: 'boneswap-ape-wmatic-bone',
+    id: 'boneswap-ape-wmatic-bone-eol',
     name: 'BONE-MATIC ALP',
     token: 'BONE-MATIC ALP',
     tokenDescription: 'ApeSwap (BoneSwap)',
@@ -1837,18 +1838,19 @@ export const polygonPools = [
     oracle: 'lps',
     oracleId: 'boneswap-ape-wmatic-bone',
     oraclePrice: 0,
-    depositsPaused: false,
-    status: 'active',
+    depositsPaused: true,
+    status: 'eol',
     platform: 'BoneSwap',
     assets: ['BONEswap', 'MATIC'],
     callFee: 0.5,
+    retireReason: 'rewards',
     addLiquidityUrl:
       'https://app.apeswap.finance/add/ETH/0x80244C2441779361F35803b8C711C6c8fC6054a3',
     buyTokenUrl:
       'https://app.apeswap.finance/#/swap?outputCurrency=0x80244C2441779361F35803b8C711C6c8fC6054a3',
   },
   {
-    id: 'boneswap-quick-usdc-bone',
+    id: 'boneswap-quick-usdc-bone-eol',
     name: 'BONE-USDC LP',
     token: 'BONE-USDC LP',
     tokenDescription: 'Quickswap (BoneSwap)',
@@ -1863,11 +1865,12 @@ export const polygonPools = [
     oracle: 'lps',
     oracleId: 'boneswap-quick-usdc-bone',
     oraclePrice: 0,
-    depositsPaused: false,
-    status: 'active',
+    depositsPaused: true,
+    status: 'eol',
     platform: 'BoneSwap',
     assets: ['BONEswap', 'USDC'],
     callFee: 0.5,
+    retireReason: 'rewards',
     addLiquidityUrl:
       'https://quickswap.exchange/#/add/0x80244C2441779361F35803b8C711C6c8fC6054a3/0x2791Bca1f2de4661ED88A30C99A7a9449Aa84174',
     buyTokenUrl:
