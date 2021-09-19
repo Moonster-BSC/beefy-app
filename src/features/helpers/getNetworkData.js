@@ -279,7 +279,7 @@ export const getNetworkMulticall = () => {
     case 1666600000:
       return '0x09EF0e7b555599A9F810789FfF68Db8DBF4c51a0';
     case 42161:
-      return ''; // TODO: add arbitrum multicall
+      return '0x13aD51a6664973EbD0749a7c84939d973F247921';
     default:
       return '';
   }
