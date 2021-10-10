@@ -15,13 +15,13 @@ import { arbitrumPools } from '../src/features/configure/vault/arbitrum_pools.js
 import { vaultABI, strategyABI } from '../src/features/configure/abi.js';
 
 const chainPools = {
-  // bsc: bscPools,
-  // heco: hecoPools,
-  // avax: avalanchePools,
+  bsc: bscPools,
+  heco: hecoPools,
+  avax: avalanchePools,
   polygon: polygonPools,
-  // fantom: fantomPools,
-  // one: harmonyPools,
-  // arbitrum: arbitrumPools,
+  fantom: fantomPools,
+  one: harmonyPools,
+  arbitrum: arbitrumPools,
 };
 
 const chainRpcs = {
