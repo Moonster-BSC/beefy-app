@@ -181,7 +181,7 @@ const validatePools = async () => {
 };
 
 const overrideExpectedAddresses = (
-  poolId: string,
+  poolId,
   { keeper, strategyOwner, vaultOwner, beefyFeeRecipient }
 ) => {
   const overrideKey = Object.keys(overrides).find(override => {
