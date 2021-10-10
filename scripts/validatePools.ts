@@ -34,16 +34,18 @@ const chainRpcs = {
   arbitrum: process.env.ARBITRUM_RPC || 'https://arb1.arbitrum.io/rpc',
 };
 
-const oldPolyOwner = '0x09dc95959978800E57464E962724a34Bb4Ac1253';
+const newPolygonVaultOwner = '0x94A9D4d38385C7bD5715A2068D69B87FF81F4BF3';
 
+// if override is undefined, means onchain value ignore.
+// if override is a new value, means onchain value is expected to be that new value.
 const overrides = {
-  'bunny-bunny-eol': { keeper: undefined, stratOwner: undefined },
+  'bunny-bunny-eol': { keeper: undefined, strategyOwner: undefined },
   'blizzard-xblzd-bnb-old-eol': { keeper: undefined },
   'blizzard-xblzd-busd-old-eol': { keeper: undefined },
   'heco-bifi-maxi': { beefyFeeRecipient: undefined },
   'beltv2-4belt': { vaultOwner: undefined }, // moonpot deployer
   'quick-': { vaultOwner: undefined }, // temp for upgrade
-  'polysage-': { vaultOwner: oldPolyOwner },
+  'polysage-': { vaultOwner: newPolygonVaultOwner },
 };
 
 const validatePools = async () => {
@@ -75,7 +77,6 @@ const validatePools = async () => {
     pools = await populateBeefyFeeRecipients(chain, pools, web3);
     pools = await populateOwners(chain, pools, web3);
 
-    pools = override(pools);
     pools.forEach(pool => {
       // Errors, should not proceed with build
       if (uniquePoolId.has(pool.id)) {
@@ -144,11 +145,28 @@ const validatePools = async () => {
       uniqueEarnedTokenAddress.add(pool.earnedTokenAddress);
       uniqueOracleId.add(pool.oracleId);
 
-      const { keeper, strategyOwner, vaultOwner, beefyFeeRecipient } =
+      let { keeper, strategyOwner, vaultOwner, beefyFeeRecipient } =
         addressBook[chain].platforms.beefyfinance;
 
+      const overrideKey = Object.keys(overrides).find(override => {
+        return pool.id.includes(override);
+      });
+
+      if (overrideKey !== undefined) {
+        const overrideObject: {
+          keeper?: string;
+          strategyOwner?: string;
+          vaultOwner?: string;
+          beefyFeeRecipient?: string;
+        } = overrides[overrideKey];
+        if (overrideObject.keeper) keeper = overrideObject.keeper;
+        if (overrideObject.strategyOwner) strategyOwner = overrideObject.strategyOwner;
+        if (overrideObject.vaultOwner) vaultOwner = overrideObject.vaultOwner;
+        if (overrideObject.beefyFeeRecipient) beefyFeeRecipient = overrideObject.beefyFeeRecipient;
+      }
+
       updates = isKeeperCorrect(pool, chain, keeper, updates);
-      updates = isStratOwnerCorrect(pool, chain, strategyOwner, updates);
+      updates = isStrategyOwnerCorrect(pool, chain, strategyOwner, updates);
       updates = isVaultOwnerCorrect(pool, chain, vaultOwner, updates);
       updates = isBeefyFeeRecipientCorrect(pool, chain, beefyFeeRecipient, updates);
     });
@@ -178,7 +196,7 @@ const validatePools = async () => {
 
 // Validation helpers. These only log for now, could throw error if desired.
 const isKeeperCorrect = (pool, chain, chainKeeper, updates) => {
-  if (pool.keeper !== undefined && pool.keeper !== chainKeeper) {
+  if (chainKeeper !== undefined && pool.keeper !== chainKeeper) {
     console.log(`Pool ${pool.id} should update keeper. From: ${pool.keeper} To: ${chainKeeper}`);
 
     if (!('keeper' in updates)) updates['keeper'] = {};
@@ -194,26 +212,30 @@ const isKeeperCorrect = (pool, chain, chainKeeper, updates) => {
   return updates;
 };
 
-const isStratOwnerCorrect = (pool, chain, owner, updates) => {
-  if (pool.stratOwner !== undefined && pool.keeper !== undefined && pool.stratOwner !== owner) {
-    console.log(`Pool ${pool.id} should update strat owner. From: ${pool.stratOwner} To: ${owner}`);
+const isStrategyOwnerCorrect = (pool, chain, chainstrategyOwner, updates) => {
+  if (chainstrategyOwner !== undefined && pool.strategyOwner !== chainstrategyOwner) {
+    console.log(
+      `Pool ${pool.id} should update strat owner. From: ${pool.strategyOwner} To: ${chainstrategyOwner}`
+    );
 
-    if (!('stratOwner' in updates)) updates['stratOwner'] = {};
-    if (!(chain in updates.stratOwner)) updates.stratOwner[chain] = {};
+    if (!('strategyOwner' in updates)) updates['strategyOwner'] = {};
+    if (!(chain in updates.strategyOwner)) updates.strategyOwner[chain] = {};
 
-    if (pool.stratOwner in updates.stratOwner[chain]) {
-      updates.stratOwner[chain][pool.stratOwner].push(pool.strategy);
+    if (pool.strategyOwner in updates.strategyOwner[chain]) {
+      updates.strategyOwner[chain][pool.strategyOwner].push(pool.strategy);
     } else {
-      updates.stratOwner[chain][pool.stratOwner] = [pool.strategy];
+      updates.strategyOwner[chain][pool.strategyOwner] = [pool.strategy];
     }
   }
 
   return updates;
 };
 
-const isVaultOwnerCorrect = (pool, chain, owner, updates) => {
-  if (pool.vaultOwner !== undefined && pool.vaultOwner !== owner) {
-    console.log(`Pool ${pool.id} should update vault owner. From: ${pool.vaultOwner} To: ${owner}`);
+const isVaultOwnerCorrect = (pool, chain, chainVaultOwner, updates) => {
+  if (chainVaultOwner !== undefined && pool.vaultOwner !== chainVaultOwner) {
+    console.log(
+      `Pool ${pool.id} should update vault owner. From: ${pool.vaultOwner} To: ${chainVaultOwner}`
+    );
 
     if (!('vaultOwner' in updates)) updates['vaultOwner'] = {};
     if (!(chain in updates.vaultOwner)) updates.vaultOwner[chain] = {};
@@ -228,14 +250,14 @@ const isVaultOwnerCorrect = (pool, chain, owner, updates) => {
   return updates;
 };
 
-const isBeefyFeeRecipientCorrect = (pool, chain, recipient, updates) => {
+const isBeefyFeeRecipientCorrect = (pool, chain, chainBeefyRecipient, updates) => {
   if (
     pool.status === 'active' &&
-    pool.beefyFeeRecipient !== undefined &&
-    pool.beefyFeeRecipient !== recipient
+    chainBeefyRecipient !== undefined &&
+    pool.beefyFeeRecipient !== chainBeefyRecipient
   ) {
     console.log(
-      `Pool ${pool.id} should update beefy fee recipient. From: ${pool.beefyFeeRecipient} To: ${recipient}`
+      `Pool ${pool.id} should update beefy fee recipient. From: ${pool.beefyFeeRecipient} To: ${chainBeefyRecipient}`
     );
 
     // TODO enable after updating Harmony beefyFeeRecipient
@@ -244,10 +266,10 @@ const isBeefyFeeRecipientCorrect = (pool, chain, recipient, updates) => {
     if (!('beefyFeeRecipient' in updates)) updates['beefyFeeRecipient'] = {};
     if (!(chain in updates.beefyFeeRecipient)) updates.beefyFeeRecipient[chain] = {};
 
-    if (pool.stratOwner in updates.beefyFeeRecipient[chain]) {
-      updates.beefyFeeRecipient[chain][pool.stratOwner].push(pool.strategy);
+    if (pool.strategyOwner in updates.beefyFeeRecipient[chain]) {
+      updates.beefyFeeRecipient[chain][pool.strategyOwner].push(pool.strategy);
     } else {
-      updates.beefyFeeRecipient[chain][pool.stratOwner] = [pool.strategy];
+      updates.beefyFeeRecipient[chain][pool.strategyOwner] = [pool.strategy];
     }
   }
 
@@ -328,22 +350,8 @@ const populateOwners = async (chain, pools, web3) => {
   const [stratResults] = await multicall.all([stratCalls]);
 
   return pools.map((pool, i) => {
-    return { ...pool, vaultOwner: vaultResults[i].owner, stratOwner: stratResults[i].owner };
+    return { ...pool, vaultOwner: vaultResults[i].owner, strategyOwner: stratResults[i].owner };
   });
-};
-
-const override = pools => {
-  Object.keys(overrides).forEach(id => {
-    pools
-      .filter(p => p.id.includes(id))
-      .forEach(pool => {
-        const override = overrides[id];
-        Object.keys(override).forEach(key => {
-          pool[key] = override[key];
-        });
-      });
-  });
-  return pools;
 };
 
 validatePools().then(exitCode => {
