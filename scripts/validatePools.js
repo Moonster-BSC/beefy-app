@@ -34,6 +34,8 @@ const chainRpcs = {
   arbitrum: process.env.ARBITRUM_RPC || 'https://arb1.arbitrum.io/rpc',
 };
 
+const oldPolyOwner = '0x09dc95959978800E57464E962724a34Bb4Ac1253';
+
 const overrides = {
   'bunny-bunny-eol': { keeper: undefined, stratOwner: undefined },
   'blizzard-xblzd-bnb-old-eol': { keeper: undefined },
@@ -41,6 +43,7 @@ const overrides = {
   'heco-bifi-maxi': { beefyFeeRecipient: undefined },
   'beltv2-4belt': { vaultOwner: undefined }, // moonpot deployer
   'quick-': { vaultOwner: undefined }, // temp for upgrade
+  'polysage-': { vaultOwner: oldPolyOwner },
 };
 
 const validatePools = async () => {
