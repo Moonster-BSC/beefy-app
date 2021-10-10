@@ -50,7 +50,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "yarn validate && react-scripts build",
-    "validate": "node ./scripts/validatePools.js",
+    "validate": "node --loader ts-node/esm ./scripts/validatePools.ts",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "prepare": "husky install"
@@ -72,9 +72,12 @@
   },
   "devDependencies": {
     "@ethersproject/address": "^5.3.0",
+    "@types/node": "^16.10.3",
     "husky": "^6.0.0",
     "lint-staged": "^11.0.0",
-    "prettier": "^2.3.0"
+    "prettier": "^2.3.0",
+    "ts-node": "^10.2.1",
+    "typescript": "^4.4.3"
   },
   "lint-staged": {
     "*.js": "prettier --write",
