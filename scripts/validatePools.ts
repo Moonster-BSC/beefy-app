@@ -15,13 +15,13 @@ import { arbitrumPools } from '../src/features/configure/vault/arbitrum_pools.js
 import { vaultABI, strategyABI } from '../src/features/configure/abi.js';
 
 const chainPools = {
-  bsc: bscPools,
-  heco: hecoPools,
-  avax: avalanchePools,
+  // bsc: bscPools,
+  // heco: hecoPools,
+  // avax: avalanchePools,
   polygon: polygonPools,
-  fantom: fantomPools,
-  one: harmonyPools,
-  arbitrum: arbitrumPools,
+  // fantom: fantomPools,
+  // one: harmonyPools,
+  // arbitrum: arbitrumPools,
 };
 
 const chainRpcs = {
@@ -197,10 +197,10 @@ const overrideExpectedAddresses = (
 
   if (overrideKey !== undefined) {
     const overrideObject: OverridableAddresses = overrides[overrideKey];
-    if (overrideObject.keeper) keeper = overrideObject.keeper;
-    if (overrideObject.strategyOwner) strategyOwner = overrideObject.strategyOwner;
-    if (overrideObject.vaultOwner) vaultOwner = overrideObject.vaultOwner;
-    if (overrideObject.beefyFeeRecipient) beefyFeeRecipient = overrideObject.beefyFeeRecipient;
+    if ('keeper' in overrideObject) keeper = overrideObject.keeper;
+    if ('strategyOwner' in overrideObject) strategyOwner = overrideObject.strategyOwner;
+    if ('vaultOwner' in overrideObject) vaultOwner = overrideObject.vaultOwner;
+    if ('beefyFeeRecipient' in overrideObject) beefyFeeRecipient = overrideObject.beefyFeeRecipient;
   }
 
   return { keeper, strategyOwner, vaultOwner, beefyFeeRecipient };
