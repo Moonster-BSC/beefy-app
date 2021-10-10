@@ -346,5 +346,6 @@ const override = pools => {
   return pools;
 };
 
-const exitCode = await validatePools();
-process.exit(exitCode);
+validatePools().then(exitCode => {
+  process.exit(exitCode);
+});
