@@ -208,7 +208,7 @@ const overrideExpectedAddresses = (
 
 // Validation helpers. These only log for now, could throw error if desired.
 const isKeeperCorrect = (pool, chain, chainKeeper, updates) => {
-  if (chainKeeper !== undefined && pool.keeper !== chainKeeper) {
+  if (pool.keeper !== undefined && chainKeeper !== undefined && pool.keeper !== chainKeeper) {
     console.log(`Pool ${pool.id} should update keeper. From: ${pool.keeper} To: ${chainKeeper}`);
 
     if (!('keeper' in updates)) updates['keeper'] = {};
@@ -224,10 +224,15 @@ const isKeeperCorrect = (pool, chain, chainKeeper, updates) => {
   return updates;
 };
 
-const isStrategyOwnerCorrect = (pool, chain, chainstrategyOwner, updates) => {
-  if (chainstrategyOwner !== undefined && pool.strategyOwner !== chainstrategyOwner) {
+const isStrategyOwnerCorrect = (pool, chain, chainStrategyOwner, updates) => {
+  if (
+    pool.strategyOwner !== undefined &&
+    pool.keeper !== undefined &&
+    chainStrategyOwner !== undefined &&
+    pool.strategyOwner !== chainStrategyOwner
+  ) {
     console.log(
-      `Pool ${pool.id} should update strat owner. From: ${pool.strategyOwner} To: ${chainstrategyOwner}`
+      `Pool ${pool.id} should update strat owner. From: ${pool.strategyOwner} To: ${chainStrategyOwner}`
     );
 
     if (!('strategyOwner' in updates)) updates['strategyOwner'] = {};
@@ -244,7 +249,11 @@ const isStrategyOwnerCorrect = (pool, chain, chainstrategyOwner, updates) => {
 };
 
 const isVaultOwnerCorrect = (pool, chain, chainVaultOwner, updates) => {
-  if (chainVaultOwner !== undefined && pool.vaultOwner !== chainVaultOwner) {
+  if (
+    pool.vaultOwner !== undefined &&
+    chainVaultOwner !== undefined &&
+    pool.vaultOwner !== chainVaultOwner
+  ) {
     console.log(
       `Pool ${pool.id} should update vault owner. From: ${pool.vaultOwner} To: ${chainVaultOwner}`
     );
@@ -265,6 +274,7 @@ const isVaultOwnerCorrect = (pool, chain, chainVaultOwner, updates) => {
 const isBeefyFeeRecipientCorrect = (pool, chain, chainBeefyRecipient, updates) => {
   if (
     pool.status === 'active' &&
+    pool.beefyFeeRecipient !== undefined &&
     chainBeefyRecipient !== undefined &&
     pool.beefyFeeRecipient !== chainBeefyRecipient
   ) {
