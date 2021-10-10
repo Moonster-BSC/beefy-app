@@ -34,11 +34,18 @@ const chainRpcs = {
   arbitrum: process.env.ARBITRUM_RPC || 'https://arb1.arbitrum.io/rpc',
 };
 
+interface OverridableAddresses {
+  keeper?: string;
+  strategyOwner?: string;
+  vaultOwner?: string;
+  beefyFeeRecipient?: string;
+}
+
 const newPolygonVaultOwner = '0x94A9D4d38385C7bD5715A2068D69B87FF81F4BF3';
 
 // if override is undefined, means onchain value ignore.
 // if override is a new value, means onchain value is expected to be that new value.
-const overrides = {
+const overrides: Record<string, OverridableAddresses> = {
   'bunny-bunny-eol': { keeper: undefined, strategyOwner: undefined },
   'blizzard-xblzd-bnb-old-eol': { keeper: undefined },
   'blizzard-xblzd-busd-old-eol': { keeper: undefined },
@@ -145,25 +152,11 @@ const validatePools = async () => {
       uniqueEarnedTokenAddress.add(pool.earnedTokenAddress);
       uniqueOracleId.add(pool.oracleId);
 
-      let { keeper, strategyOwner, vaultOwner, beefyFeeRecipient } =
-        addressBook[chain].platforms.beefyfinance;
-
-      const overrideKey = Object.keys(overrides).find(override => {
-        return pool.id.includes(override);
-      });
-
-      if (overrideKey !== undefined) {
-        const overrideObject: {
-          keeper?: string;
-          strategyOwner?: string;
-          vaultOwner?: string;
-          beefyFeeRecipient?: string;
-        } = overrides[overrideKey];
-        if (overrideObject.keeper) keeper = overrideObject.keeper;
-        if (overrideObject.strategyOwner) strategyOwner = overrideObject.strategyOwner;
-        if (overrideObject.vaultOwner) vaultOwner = overrideObject.vaultOwner;
-        if (overrideObject.beefyFeeRecipient) beefyFeeRecipient = overrideObject.beefyFeeRecipient;
-      }
+      const chainAddresses = addressBook[chain].platforms.beefyfinance;
+      const { keeper, strategyOwner, vaultOwner, beefyFeeRecipient } = overrideExpectedAddresses(
+        pool.id,
+        chainAddresses
+      );
 
       updates = isKeeperCorrect(pool, chain, keeper, updates);
       updates = isStrategyOwnerCorrect(pool, chain, strategyOwner, updates);
@@ -192,6 +185,25 @@ const validatePools = async () => {
   console.log('Required updates.', JSON.stringify(updates));
 
   return exitCode;
+};
+
+const overrideExpectedAddresses = (
+  poolId: string,
+  { keeper, strategyOwner, vaultOwner, beefyFeeRecipient }: OverridableAddresses
+): OverridableAddresses => {
+  const overrideKey = Object.keys(overrides).find(override => {
+    return poolId.includes(override);
+  });
+
+  if (overrideKey !== undefined) {
+    const overrideObject: OverridableAddresses = overrides[overrideKey];
+    if (overrideObject.keeper) keeper = overrideObject.keeper;
+    if (overrideObject.strategyOwner) strategyOwner = overrideObject.strategyOwner;
+    if (overrideObject.vaultOwner) vaultOwner = overrideObject.vaultOwner;
+    if (overrideObject.beefyFeeRecipient) beefyFeeRecipient = overrideObject.beefyFeeRecipient;
+  }
+
+  return { keeper, strategyOwner, vaultOwner, beefyFeeRecipient };
 };
 
 // Validation helpers. These only log for now, could throw error if desired.
