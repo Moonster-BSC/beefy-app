@@ -41,8 +41,8 @@ export const fantomPools = [
     tokenDecimals: 18,
     tokenDescriptionUrl: '#',
     earnedToken: 'mooSpiritsSPELL-SPELL',
-    earnedTokenAddress: '',
-    earnContractAddress: '',
+    earnedTokenAddress: '0x3DC588c510C5735568d38dED3aB3eB426f5E7474',
+    earnContractAddress: '0x3DC588c510C5735568d38dED3aB3eB426f5E7474',
     pricePerFullShare: 1,
     tvl: 0,
     oracle: 'lps',
@@ -53,7 +53,6 @@ export const fantomPools = [
     platform: 'SpiritSwap',
     assets: ['sSPELL', 'SPELL'],
     risks: [
-      // TODO
       'COMPLEXITY_LOW',
       'BATTLE_TESTED',
       'IL_NONE',
