@@ -730,5 +730,5 @@ export const moonriverPools = [
       'https://app.solarbeam.io/exchange/swap?inputCurrency=0x6bD193Ee6D2104F14F94E2cA6efefae561A4334B&outputCurrency=0xbD90A6125a84E5C512129D622a75CDDE176aDE5E',
     addLiquidityUrl:
       'https://app.solarbeam.io/exchange/add/0xbD90A6125a84E5C512129D622a75CDDE176aDE5E/0x6bD193Ee6D2104F14F94E2cA6efefae561A4334B',
-  }
+  },
 ];

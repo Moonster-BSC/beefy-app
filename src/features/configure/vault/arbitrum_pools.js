@@ -30,7 +30,8 @@ export const arbitrumPools = [
     ],
     stratType: 'Maxi',
     withdrawalFee: '0.05%',
-    buyTokenUrl: 'https://app.sushi.com/swap?inputCurrency=ETH&outputCurrency=0x99C409E5f62E4bd2AC142f17caFb6810B8F0BAAE',
+    buyTokenUrl:
+      'https://app.sushi.com/swap?inputCurrency=ETH&outputCurrency=0x99C409E5f62E4bd2AC142f17caFb6810B8F0BAAE',
   },
   {
     id: 'spell-mim-crv',
