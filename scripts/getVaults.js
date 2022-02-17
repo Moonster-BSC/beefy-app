@@ -1,4 +1,4 @@
-export const fantomPools = [
+const fantomPools = [
   {
     id: 'scream-spell',
     logo: 'single-assets/SPELL.png',
@@ -4132,3 +4132,17 @@ export const fantomPools = [
     createdAt: 1620386607,
   },
 ];
+
+const getActiveVaults = pools => {
+  const vaults = {};
+  for (const pool of pools) {
+    if (pool.id.endsWith('eol')) {
+      continue;
+    } else {
+      vaults[pool.earnedToken] = pool.earnedTokenAddress;
+    }
+  }
+  console.log(JSON.stringify(vaults));
+};
+
+getActiveVaults(fantomPools);
